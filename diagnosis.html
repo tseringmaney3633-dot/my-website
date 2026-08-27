@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nipah Virus · Diagnostic approaches</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.2rem 1.2rem;
+            font-family: 'Inter', sans-serif;
+            background: #f1f4f8;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(30, 80, 120, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(20, 60, 100, 0.04) 0%, transparent 45%),
+                repeating-linear-gradient(45deg, rgba(200, 215, 235, 0.08) 0px, rgba(200, 215, 235, 0.08) 2px, 
+                                          transparent 2px, transparent 8px);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            border-radius: 3.2rem;
+            padding: 2.4rem 2.8rem 1.8rem;
+            box-shadow: 0 25px 50px -18px rgba(10, 30, 50, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        /* header */
+        .diagnostic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 2px solid rgba(20, 60, 100, 0.08);
+            padding-bottom: 1.4rem;
+        }
+        .title-group h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            letter-spacing: -0.025em;
+            color: #0b2d42;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .title-group h1 i {
+            color: #256f8a;
+            font-size: 2.2rem;
+        }
+        .title-group .sub {
+            font-weight: 400;
+            color: #2e5775;
+            font-size: 0.95rem;
+            margin-top: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .title-group .sub span {
+            background: rgba(30, 80, 120, 0.08);
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .biosafety-badge {
+            background: #5e2e3b;
+            color: #f9e9e9;
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,200,200,0.2);
+            box-shadow: 0 2px 8px rgba(80, 20, 30, 0.1);
+        }
+        .biosafety-badge i {
+            margin-right: 6px;
+        }
+
+        /* grid cards */
+        .diag-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2.4rem 0 1.6rem;
+        }
+
+        .diag-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 2.2rem;
+            padding: 1.8rem 1.6rem 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 6px 16px rgba(0, 20, 35, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .diag-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 18px 32px -12px rgba(10, 45, 75, 0.18);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: #1d5d7a;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-icon i {
+            background: rgba(20, 70, 110, 0.06);
+            padding: 0.4rem 0.5rem;
+            border-radius: 18px;
+        }
+        .diag-card h3 {
+            font-weight: 600;
+            font-size: 1.4rem;
+            color: #0c3348;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
+        }
+        .diag-card .highlight {
+            font-weight: 600;
+            color: #1d5f7a;
+        }
+        .diag-card p, .diag-card li {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #1b4056;
+        }
+        .diag-card ul {
+            list-style: none;
+            margin-top: 0.3rem;
+        }
+        .diag-card ul li {
+            padding: 0.25rem 0 0.25rem 1.5rem;
+            position: relative;
+        }
+        .diag-card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 2px;
+            color: #2a799b;
+            font-weight: 600;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(20, 80, 120, 0.08);
+            padding: 0.15rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #15506b;
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-top: 0.6rem;
+            align-self: flex-start;
+        }
+        .tag i {
+            margin-right: 4px;
+            font-size: 0.7rem;
+        }
+
+        .card-footnote {
+            margin-top: auto;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(30, 80, 120, 0.06);
+            font-size: 0.8rem;
+            color: #2b5b78;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* special card: virus isolation */
+        .diag-card.bsl4 {
+            border-left: 4px solid #b33a4a;
+            background: rgba(255, 245, 245, 0.6);
+        }
+        .diag-card.bsl4 .card-icon i {
+            background: rgba(160, 40, 50, 0.08);
+            color: #a83a48;
+        }
+
+        /* button container - updated to include external link */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            padding: 1.4rem 0 0.6rem;
+            border-top: 1px solid rgba(30, 70, 110, 0.08);
+            margin-top: 0.6rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+            border: 1px solid transparent;
+            letter-spacing: 0.01em;
+        }
+        .btn-primary {
+            background: #1c506b;
+            color: white;
+            border-color: #1c506b;
+        }
+        .btn-primary:hover {
+            background: #134057;
+            box-shadow: 0 6px 16px rgba(20, 65, 95, 0.25);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #1f4b63;
+            border-color: #c5d5e2;
+        }
+        .btn-secondary:hover {
+            background: #e6eef7;
+            border-color: #89aec9;
+            transform: translateY(-2px);
+        }
+
+        /* External instrument link - WHO fact sheet */
+        .instrument-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1d5b78;
+            background: rgba(30, 90, 130, 0.07);
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            border: 1px solid rgba(30, 90, 130, 0.15);
+            transition: all 0.2s ease;
+            backdrop-filter: blur(2px);
+        }
+        .instrument-link:hover {
+            background: rgba(30, 90, 130, 0.14);
+            box-shadow: 0 4px 14px rgba(20, 70, 110, 0.12);
+            transform: scale(1.02);
+            border-color: #2f7a9b;
+        }
+        .instrument-link .arrow {
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding-top: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: #3b637b;
+            letter-spacing: 0.02em;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 1.8rem 1.2rem;
+                border-radius: 2rem;
+            }
+            .title-group h1 {
+                font-size: 2rem;
+                flex-wrap: wrap;
+            }
+            .diag-grid {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+            }
+            .button-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn {
+                justify-content: center;
+            }
+            .instrument-link {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- header -->
+    <div class="diagnostic-header">
+        <div class="title-group">
+            <h1>
+                <i class="fas fa-microscope" style="font-style:normal;">🔬</i> Diagnosis
+            </h1>
+            <div class="sub">
+                <span><i class="fas fa-flask" style="font-style:normal;">🧪</i> RT-PCR · Serology · Isolation</span>
+                <span><i class="fas fa-shield-alt" style="font-style:normal;">🛡️</i> BSL-4 required</span>
+            </div>
+        </div>
+        <div class="biosafety-badge">
+            <i class="fas fa-biohazard" style="font-style:normal;">⚠️</i> strict biosafety
+        </div>
+    </div>
+
+    <!-- diagnostic cards -->
+    <div class="diag-grid">
+
+        <!-- RT-PCR -->
+        <div class="diag-card">
+            <div class="card-icon"><i style="font-style:normal;">🧬</i> RT‑PCR</div>
+            <h3>Gold standard · acute phase</h3>
+            <p><span class="highlight">First-choice</span> for detection of viral RNA in:</p>
+            <ul>
+                <li>Throat swabs · blood · urine</li>
+                <li>Cerebrospinal fluid (CSF)</li>
+            </ul>
+            <p style="margin-top:0.4rem;"><span class="highlight">N gene</span> assays: highly sensitive, but occasional false negatives due to sequence mismatch with circulating strains.</p>
+            <div class="tag"><i>⏱️</i> acute infection</div>
+            <div class="card-footnote"><i>📌</i> preferred for early diagnosis</div>
+        </div>
+
+        <!-- Serology (ELISA) -->
+        <div class="diag-card">
+            <div class="card-icon"><i style="font-style:normal;">🧫</i> ELISA</div>
+            <h3>Serology · IgM &amp; IgG</h3>
+            <ul>
+                <li><span class="highlight">IgM</span> – early acute infection; peaks ~9 days, lasts ~3 months</li>
+                <li><span class="highlight">IgG</span> – long-term antibodies (persist &gt;8 months) for retrospective &amp; surveillance</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Detects anti‑NiV antibodies in serum.</p>
+            <div class="tag"><i>🔄</i> acute + retrospective</div>
+            <div class="card-footnote"><i>📊</i> epidemiological surveillance</div>
+        </div>
+
+        <!-- Virus Isolation (BSL-4) -->
+        <div class="diag-card bsl4">
+            <div class="card-icon"><i style="font-style:normal;">🧪</i> Virus Isolation</div>
+            <h3>BSL‑4 · Vero‑E6 cells</h3>
+            <p>Performed <span class="highlight">exclusively</span> in BSL‑4 laboratories using permissive Vero‑E6 cell lines.</p>
+            <ul>
+                <li>Rapid cytopathic effects (CPE) within 3 days</li>
+                <li>Large syncytia &amp; punctate holes in monolayer</li>
+            </ul>
+            <div class="tag"><i>⚠️</i> BSL‑4 only</div>
+            <div class="card-footnote"><i>🧫</i> cytopathic effect · syncytia formation</div>
+        </div>
+    </div>
+
+    <!-- button container with external instrument link -->
+    <div class="button-container">
+        <a href="introduction.html" class="btn btn-secondary">
+            🏠 Back to Introduction
+        </a>
+        <a href="content table.html" class="btn btn-primary">
+            📖 Go to Table
+        </a>
+        <!-- External Link: WHO fact sheet on Nipah virus diagnostics -->
+        <a href="https://www.who.int/news-room/fact-sheets/detail/nipah-virus" target="_blank" class="instrument-link">
+            <span>🔍</span> Learn more about diagnostic instruments
+            <span class="arrow">↗</span>
+        </a>
+    </div>
+
+    <footer>
+        <span>Diagnostic approaches for Nipah virus · NiV-B &amp; NiV-M</span>
+        <span>clinical reference · biosafety level 4</span>
+    </footer>
+
+</div>
+<!-- Font Awesome for icons (optional, but we use unicode fallback) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</body>
+</html>

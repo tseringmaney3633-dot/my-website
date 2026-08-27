@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nipah Virus — Treatment, Prevention &amp; Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1.2rem;
+    font-family: 'Inter', sans-serif;
+    background: #e8edf2;
+    background-image: 
+      radial-gradient(ellipse at 15% 25%, rgba(60, 120, 150, 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 75%, rgba(40, 90, 120, 0.05) 0%, transparent 50%),
+      repeating-linear-gradient(135deg, rgba(180, 200, 220, 0.06) 0px, rgba(180, 200, 220, 0.06) 2px, 
+                                transparent 2px, transparent 10px);
+  }
+
+  .sheet {
+    max-width: 1220px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(170%);
+    -webkit-backdrop-filter: blur(16px) saturate(170%);
+    border-radius: 3.2rem 3.2rem 2.8rem 2.8rem;
+    padding: 2.6rem 3rem 1.8rem;
+    box-shadow: 0 30px 70px -24px rgba(15, 40, 65, 0.25), 0 0 0 1px rgba(255,255,255,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+
+  /* header */
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 2px solid rgba(30, 70, 100, 0.08);
+    margin-bottom: 0.8rem;
+  }
+
+  .title-block h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.8rem;
+    letter-spacing: -0.02em;
+    color: #0b2f42;
+    line-height: 1.05;
+  }
+  .title-block h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: #2b5f7a;
+  }
+  .title-block .subtitle {
+    font-weight: 400;
+    color: #3a667e;
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .title-block .subtitle .pill {
+    background: rgba(30, 80, 120, 0.06);
+    padding: 0.1rem 1rem;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .badge {
+    padding: 0.35rem 1.4rem;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+  }
+  .badge-warn {
+    background: #5e2e3b;
+    color: #f9e9e9;
+    border-color: rgba(255,200,200,0.15);
+  }
+  .badge-teal {
+    background: #1c5a6b;
+    color: white;
+    border-color: rgba(255,255,255,0.15);
+  }
+  .badge-amber {
+    background: #8f6b3a;
+    color: #fcf6ed;
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  /* meta row */
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 1.2rem 0 1.8rem;
+    border: 1px solid rgba(30, 70, 100, 0.12);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.4);
+  }
+  .meta {
+    flex: 1 1 160px;
+    padding: 0.7rem 1.2rem;
+    border-right: 1px solid rgba(30, 70, 100, 0.08);
+  }
+  .meta:last-child { border-right: none; }
+  .meta .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4a6f84;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .meta .v {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f3a50;
+  }
+  .meta.warn .v { color: #b3474a; }
+
+  /* sections */
+  .section {
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(30, 70, 100, 0.06);
+  }
+  .section:last-of-type { border-bottom: none; }
+
+  .sec-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .sec-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: white;
+    background: #1c5a6b;
+    padding: 0.15rem 0.7rem;
+    border-radius: 30px;
+  }
+  .sec-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #0b2f42;
+  }
+  .sec-desc {
+    font-size: 0.92rem;
+    color: #2d556b;
+    max-width: 70ch;
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
+  }
+
+  /* care grid */
+  .care-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .care-item {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(30, 70, 100, 0.08);
+    border-radius: 16px;
+    padding: 1.2rem 1.2rem 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .care-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 45, 70, 0.06);
+  }
+  .care-item .care-k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #1c5a6b;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .care-item p {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #2d556b;
+  }
+
+  /* drug rows */
+  .drug {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 1.6rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid rgba(30, 70, 100, 0.06);
+  }
+  .drug:first-child { border-top: none; }
+  .drug:last-child { padding-bottom: 0; }
+
+  .drug h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #0b2f42;
+    margin-bottom: 0.3rem;
+  }
+  .drug p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #2d556b;
+    max-width: 60ch;
+  }
+  .tag-row {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.7rem;
+    border-radius: 30px;
+    border: 1px solid rgba(30, 70, 100, 0.12);
+    color: #3a667e;
+  }
+  .tag.strong {
+    background: rgba(28, 90, 107, 0.08);
+    border-color: #1c5a6b;
+    color: #1c5a6b;
+  }
+  .tag.caution {
+    background: rgba(180, 120, 60, 0.08);
+    border-color: #a87d3a;
+    color: #8f6b3a;
+  }
+
+  /* efficacy bars */
+  .efficacy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .ebar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .ebar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: #3a667e;
+    width: 70px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .ebar-track {
+    flex: 1;
+    height: 7px;
+    background: rgba(30, 70, 100, 0.06);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(30, 70, 100, 0.05);
+  }
+  .ebar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: #1c5a6b;
+  }
+  .ebar-fill.high { background: #0f4a5a; }
+  .ebar-fill.mixed { background: #b88a4a; }
+  .ebar-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #0b2f42;
+    width: 32px;
+    flex-shrink: 0;
+  }
+
+  /* prevention grid */
+  .prevent-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+  .prevent-card {
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(30, 70, 100, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .prevent-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 45, 70, 0.06);
+  }
+  .prevent-card .pc-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: white;
+    background: #1c5a6b;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+  }
+  .prevent-card .pc-body {
+    padding: 1rem 1.1rem 1.2rem;
+  }
+  .prevent-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #0b2f42;
+    margin-bottom: 0.4rem;
+  }
+  .prevent-card p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #2d556b;
+  }
+  .prevent-card ul {
+    margin-top: 0.4rem;
+    padding-left: 0;
+  }
+  .prevent-card li {
+    list-style: none;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #2d556b;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.2rem;
+  }
+  .prevent-card li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #1c5a6b;
+    font-weight: 700;
+  }
+
+  /* buttons */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    padding: 1.8rem 0 0.6rem;
+    border-top: 1px solid rgba(30, 70, 100, 0.06);
+    margin-top: 1.2rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.8rem;
+    border-radius: 60px;
+    text-decoration: none;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: #1c5a6b;
+    color: white;
+    border-color: #1c5a6b;
+  }
+  .btn-primary:hover {
+    background: #0f4a5a;
+    box-shadow: 0 6px 16px rgba(20, 65, 85, 0.2);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: #1c5a6b;
+    border-color: #c5d5df;
+  }
+  .btn-secondary:hover {
+    background: #e3edf4;
+    border-color: #89aec9;
+    transform: translateY(-2px);
+  }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    margin-top: 0.2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: #4a6f84;
+    letter-spacing: 0.02em;
+    opacity: 0.7;
+    border-top: 1px solid rgba(30, 70, 100, 0.04);
+  }
+
+  @media (max-width: 780px) {
+    .sheet {
+      padding: 1.8rem 1.2rem;
+      border-radius: 2rem;
+    }
+    .title-block h1 { font-size: 2rem; }
+    .care-grid, .prevent-grid { grid-template-columns: 1fr; }
+    .drug { grid-template-columns: 1fr; }
+    .efficacy { margin-top: 0.8rem; }
+    .meta-row { flex-direction: column; }
+    .meta { border-right: none; border-bottom: 1px solid rgba(30, 70, 100, 0.06); }
+    .meta:last-child { border-bottom: none; }
+    .button-container { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; }
+    .badge-group { margin-top: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- header -->
+  <div class="header-top">
+    <div class="title-block">
+      <h1>Treatment, prevention <em>&amp; control</em></h1>
+      <div class="subtitle">
+        <span>Nipah virus management</span>
+        <span class="pill">🧬 NiV-B · NiV-M</span>
+        <span class="pill">🛡️ One Health framework</span>
+      </div>
+    </div>
+    <div class="badge-group">
+      <span class="badge badge-warn">⚠️ No licensed therapy</span>
+      <span class="badge badge-teal">🧪 Supportive care</span>
+      <span class="badge badge-amber">📊 Pre-clinical</span>
+    </div>
+  </div>
+
+  <!-- meta row -->
+  <div class="meta-row">
+    <div class="meta warn">
+      <span class="k">FDA-approved therapy</span>
+      <span class="v">None licensed</span>
+    </div>
+    <div class="meta">
+      <span class="k">Primary management</span>
+      <span class="v">Supportive care</span>
+    </div>
+    <div class="meta">
+      <span class="k">Best pre-clinical result</span>
+      <span class="v">100% protection</span>
+    </div>
+    <div class="meta">
+      <span class="k">Control framework</span>
+      <span class="v">One Health</span>
+    </div>
+  </div>
+
+  <!-- section 01: supportive care -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-number">01</span>
+      <h2>Clinical supportive care</h2>
+    </div>
+    <p class="sec-desc">With no licensed antiviral or vaccine, supportive treatment remains the backbone of case management.</p>
+    <div class="care-grid">
+      <div class="care-item">
+        <span class="care-k">🔄 Fluid &amp; electrolyte balance</span>
+        <p>Close monitoring and correction to stabilize patients through the acute phase.</p>
+      </div>
+      <div class="care-item">
+        <span class="care-k">⚡ Seizure management</span>
+        <p>Anticonvulsant treatment for the seizures and myoclonus seen in encephalitic disease.</p>
+      </div>
+      <div class="care-item">
+        <span class="care-k">🫁 Mechanical ventilation</span>
+        <p>Invasive ventilation for patients progressing to severe respiratory failure or ARDS.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- section 02: pharmacotherapy -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-number">02</span>
+      <h2>Pharmacotherapy — off-label &amp; compassionate use</h2>
+    </div>
+    <p class="sec-desc">No agent is licensed for NiV, but several have been used under open-label trials, compassionate-use protocols, or evaluated in pre-clinical challenge models.</p>
+
+    <!-- ribavirin -->
+    <div class="drug">
+      <div>
+        <h3>Ribavirin</h3>
+        <p>Broad-spectrum guanosine analog evaluated in human outbreaks. Open-label trials in Malaysia and Kerala reported relative mortality reductions, but animal challenge models (Syrian hamsters, African green monkeys) found it largely ineffective at preventing death — clinical efficacy in humans remains debated. Also used as post-exposure prophylaxis for high-risk healthcare exposures.</p>
+        <div class="tag-row">
+          <span class="tag caution">Debated efficacy</span>
+          <span class="tag">Post-exposure prophylaxis</span>
+        </div>
+      </div>
+      <div class="efficacy">
+        <div class="ebar-row">
+          <span class="ebar-label">Malaysia</span>
+          <div class="ebar-track"><div class="ebar-fill mixed" style="width:36%"></div></div>
+          <span class="ebar-val">36%</span>
+        </div>
+        <div class="ebar-row">
+          <span class="ebar-label">Kerala</span>
+          <div class="ebar-track"><div class="ebar-fill mixed" style="width:20%"></div></div>
+          <span class="ebar-val">20%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- remdesivir / favipiravir -->
+    <div class="drug">
+      <div>
+        <h3>Remdesivir &amp; Favipiravir</h3>
+        <p>Broad-spectrum antivirals with strong pre-clinical results. Remdesivir gave complete protection in African green monkeys challenged with lethal NiV-B when given 24 hours post-infection. Favipiravir fully protected Syrian hamsters in lethal challenge models.</p>
+        <div class="tag-row">
+          <span class="tag strong">Pre-clinical, high efficacy</span>
+        </div>
+      </div>
+      <div class="efficacy">
+        <div class="ebar-row">
+          <span class="ebar-label">Remdesivir</span>
+          <div class="ebar-track"><div class="ebar-fill high" style="width:100%"></div></div>
+          <span class="ebar-val">100%</span>
+        </div>
+        <div class="ebar-row">
+          <span class="ebar-label">Favipiravir</span>
+          <div class="ebar-track"><div class="ebar-fill high" style="width:100%"></div></div>
+          <span class="ebar-val">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- m102.4 -->
+    <div class="drug">
+      <div>
+        <h3>Monoclonal antibody — m102.4</h3>
+        <p>A fully humanized monoclonal antibody targeting the G attachment glycoprotein, blocking receptor binding. Protected non-human primates when given up to 3 days post-exposure, and has been used under compassionate-use protocols in Australia, India, and the US following high-risk exposures.</p>
+        <div class="tag-row">
+          <span class="tag strong">Effective to +3 days post-exposure</span>
+          <span class="tag">Compassionate use</span>
+        </div>
+      </div>
+      <div class="efficacy">
+        <div class="ebar-row">
+          <span class="ebar-label">NHP model</span>
+          <div class="ebar-track"><div class="ebar-fill high" style="width:100%"></div></div>
+          <span class="ebar-val">100%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- section 03: prevention -->
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-number">03</span>
+      <h2>Prevention &amp; physical barriers</h2>
+    </div>
+    <div class="prevent-grid">
+      <div class="prevent-card">
+        <div class="pc-head">🌴 Date palm sap</div>
+        <div class="pc-body">
+          <h3>Blocking the sap route</h3>
+          <p>Informational campaigns in Bangladesh discourage raw sap consumption.</p>
+          <ul>
+            <li>Bamboo skirts ("banas") installed around palm trunks to physically block bat access</li>
+            <li>Boiling raw sap inactivates the virus</li>
+            <li>Fermenting sap into molasses also inactivates it</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prevent-card">
+        <div class="pc-head">🏥 Healthcare settings</div>
+        <div class="pc-body">
+          <h3>Infection control</h3>
+          <p>Suspected patients are placed in negative-pressure airborne isolation rooms.</p>
+          <ul>
+            <li>Standard, contact, and airborne precautions strictly followed</li>
+            <li>N95 respirators, gowns, gloves, protective eyewear required</li>
+            <li>Rigorous surface disinfection — virus can persist on bedsheets and clinical surfaces</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prevent-card">
+        <div class="pc-head">🌍 Systems-level</div>
+        <div class="pc-body">
+          <h3>"One Health" approach</h3>
+          <p>Fruit bat ecology, agricultural setups, and domestic livestock interact in complex ways.</p>
+          <ul>
+            <li>Integrated veterinary, medical, and ecological surveillance</li>
+            <li>Collaborative strategy across sectors, not siloed response</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- navigation buttons -->
+  <div class="button-container">
+    <a href="introduction.html" class="btn btn-secondary">🏠 Back to Introduction</a>
+    <a href="content table.html" class="btn btn-primary">📖 Go to Table</a>
+  </div>
+
+  <footer>
+    <span>Compiled from clinical &amp; pre-clinical literature · NiV-B (Bangladesh) &amp; NiV-M (Malaysia) lineages</span>
+    <span>For clinical / educational reference only</span>
+  </footer>
+
+</div>
+</body>
+</html>

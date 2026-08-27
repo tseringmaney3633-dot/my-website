@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Page</title>
+    <style>
+        /* Additional styles for the callout */
+        .callout-wrap {
+            padding: 1.6rem 0 0.6rem;
+            margin-top: 1.5rem;
+        }
+        .callout {
+            border: 1px solid rgba(168, 103, 43, 0.3);
+            background: rgba(242, 230, 216, 0.4);
+            border-radius: 16px;
+            padding: 1.6rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            transition: box-shadow 0.2s ease;
+        }
+        .callout:hover {
+            box-shadow: 0 4px 16px rgba(168, 103, 43, 0.06);
+        }
+        .callout .ctext {
+            flex: 1;
+            min-width: 240px;
+        }
+        .callout .ctag {
+            font-family: 'Courier New', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #8f6b3a;
+            margin-bottom: 0.4rem;
+            display: block;
+            font-weight: 600;
+        }
+        .callout h3 {
+            font-family: 'Georgia', serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #0b2f42;
+            margin-bottom: 0.3rem;
+        }
+        .callout p {
+            font-size: 0.9rem;
+            color: #2d556b;
+            line-height: 1.5;
+            max-width: 52ch;
+        }
+        .callout a.cbtn {
+            font-family: Arial, sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: white;
+            background: #8f6b3a;
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            white-space: nowrap;
+            transition: background 0.2s ease, transform 0.15s ease;
+            border: none;
+            display: inline-block;
+        }
+        .callout a.cbtn:hover {
+            background: #73562e;
+            transform: translateY(-2px);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #eef1f0;
+        }
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            color: #0b2f42;
+        }
+        li {
+            list-style: none;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 16px;
+            border: 1px solid #ccc;
+        }
+        thead th {
+            background-color: #1c5a6b;
+            color: white;
+        }
+        .sub-head {
+            background-color: #e8edf2;
+        }
+        .link-cell {
+            color: green;
+        }
+        .link-cell a {
+            color: #1c5a6b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .link-cell a:hover {
+            text-decoration: underline;
+        }
+        .footer-note {
+            text-align: center;
+            background-color: #f0f0f0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back button -->
+    <li>
+        <a href="introduction.html" style="
+            display: inline-block;
+            padding: 16px 45px;
+            background: rgba(30, 95, 168, 0.15);
+            backdrop-filter: blur(20px);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-radius: 60px;
+            border: 1px solid rgba(30, 95, 168, 0.25);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 20px rgba(30, 95, 168, 0.15);
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        " 
+        onmouseover="this.style.background='rgba(30, 95, 168, 0.3)'; this.style.transform='translateY(-5px) scale(1.03)'; this.style.boxShadow='0 12px 40px rgba(30, 95, 168, 0.3)'; this.style.borderColor='rgba(30, 95, 168, 0.5)'" 
+        onmouseout="this.style.background='rgba(30, 95, 168, 0.15)'; this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(30, 95, 168, 0.15)'; this.style.borderColor='rgba(30, 95, 168, 0.25)'">
+            <span style="margin-right: 10px;">🏠</span> Back to Introduction
+        </a>
+    </li>
+
+    <h1>Table of Content</h1>
+    <p>This is the table of content.</p>
+
+    <!-- TABLE (UNCHANGED) -->
+    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th colspan="4">link for each topic table</th>
+            </tr>
+            <tr style="background-color: #555; color: white;">
+                <th>Sr.no</th>
+                <th>Title</th>
+                <th>link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>001</td>
+                <td>history about nipah virus</td>
+                <td style="color: green;">✓ <li><a href="about2.html">history</a></li></td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>proteins in nipah virus</td>
+                <td style="color: green;">✓ <li><a href="protein.html"> proteins</a></li></td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>Natural Reservoirs and Host Range</td>
+                <td style="color: green;">✓ <li><a href="reservior.html">Reserviors</a></li></td>
+            </tr>
+            <tr>
+                <td>004</td>
+                <td>Transmission Dynamics</td>
+                <td style="color: green;">✓ <li><a href="Transmission Dynamics.html">Transmission</a></li></td>
+            </tr>
+            <tr>
+                <td>005</td>
+                <td> Pathogenesis & Pathology </td>
+                <td style="color: green;">✓ <li><a href="Pathogenesis.html">pathogenesis and pathology</a></li></td>
+            </tr>
+            <tr>
+                <td>006</td>
+                <td> clinical manifestations </td>
+                <td style="color: green;">✓ <li><a href="clinical manifestations.html">Clinical Manifestations</a></li></td>
+            </tr>
+            <tr>
+                <td>007</td>
+                <td> Diagnosis </td>
+                <td style="color: green;">✓ <li><a href="diagnosis.html">Diagnosis</a></li></td>
+            </tr>
+            <tr>
+                <td>008</td>
+                <td>Treatment, Prevention, & Control</td>
+                <td style="color: green;">✓ <li><a href="treatment.html">Treatment, Prevention, & Control</a></li></td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: center; background-color: #f0f0f0;">
+                    <em>These are the 8 sub topic of Nipah virus</em>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- EXTENDED READING CALLOUT (ADDED AT BOTTOM) -->
+    <div class="callout-wrap">
+        <div class="callout">
+            <div class="ctext">
+                <span class="ctag">Extended reading</span>
+                <h3>Repurposing of FDA-approved drugs on Nipah virus</h3>
+                <p>A closer look at existing approved medications being investigated as candidates against NiV infection.</p>
+            </div>
+            <a class="cbtn" href="fda_approved_drugs.html">Read more →</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nipah Virus (NiV) - Comprehensive Overview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #1a1a2e;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #3b3b3b;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 20px 60px;
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7ff, #eef1ff);
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Image Container for Transmission */
+        .transmission-image-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+            border: 2px dashed #667eea;
+        }
+
+        .transmission-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-placeholder {
+            padding: 60px 20px;
+            color: #667eea;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+        }
+
+        .danger-box {
+            background: linear-gradient(135deg, #f8d7da, #ffc1c1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #dc3545;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #d4edda, #c1e8c1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #28a745;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9ff;
+        }
+
+        tr:hover {
+            background: #eef1ff;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            nav ul {
+                gap: 15px;
+            }
+            nav ul li a {
+                font-size: 12px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+<nav>
+    <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#genomics">Genomics</a></li>
+        <li><a href="#transmission">Transmission</a></li>
+        <li><a href="#pathogenesis">Pathogenesis</a></li>
+        <li><a href="#clinical">Clinical</a></li>
+        <li><a href="#diagnostics">Diagnostics</a></li>
+        <li><a href="#treatment">Treatment</a></li>
+        <li><a href="#prevention">Prevention</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero">
+    <h1>🦠 Nipah Virus (NiV)</h1>
+    <p>An emerging, highly pathogenic zoonotic virus causing severe neurological and respiratory diseases in humans and animals. Classified as a Biosafety Level 4 (BSL-4) agent.</p>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+    <!-- Overview -->
+    <section id="overview">
+        <h2>📋 Overview and Classification</h2>
+        <p>Nipah virus (NiV) is an emerging, highly pathogenic zoonotic virus that causes severe and often fatal neurological and respiratory diseases in both humans and animals. Due to its high virulence, extreme lethality, and the historical lack of widely approved vaccines or treatments for human use, it is classified globally as a Biosafety Level 4 (BSL-4) agent.</p>
+        <p>NiV belongs to the genus <em>Henipavirus</em> within the subfamily <em>Paramyxovirinae</em>, family <em>Paramyxoviridae</em> (order <em>Mononegavirales</em>). The genus <em>Henipavirus</em> also contains Hendra virus (HeV), Cedar virus, Mojiang virus, and Ghana bat virus.</p>
+        <p>The virus was first identified in March 1999 during an outbreak among pig farmers in Kampung Sungai Nipah (Nipah River Village) in Malaysia, from which it derives its name.</p>
+        <div class="highlight-box">
+            <strong>Key Fact:</strong> NiV is an enveloped, pleomorphic, single-stranded, negative-sense, non-segmented RNA virus with a genome of approximately 18.2 kilobases.
+        </div>
+    </section>
+
+    <!-- Genomics -->
+    <section id="genomics">
+        <h2>🧬 Genomic Structure and Protein Composition</h2>
+        <p>The Nipah virus genome contains six consecutively organized structural genes arranged in the order of <code>3'-N-P-M-F-G-L-5'</code>, which encode the virus's primary structural proteins:</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h4>Nucleocapsid Protein (N)</h4>
+                <p>Binds directly to the viral RNA to form the viral ribonucleoprotein (vRNP) core. Responsible for governing viral RNA production and regulating viral polymerase activity.</p>
+            </div>
+            <div class="card">
+                <h4>Phosphoprotein (P)</h4>
+                <p>Forms a crucial part of the vRNP complex alongside the N and L proteins. The P gene also serves as the template for multiple non-structural accessory proteins.</p>
+            </div>
+            <div class="card">
+                <h4>Matrix Protein (M)</h4>
+                <p>Shapes the inner viral shell beneath the envelope. Coordinates viral assembly, morphogenesis, and the budding of new virions from host cells.</p>
+            </div>
+            <div class="card">
+                <h4>Fusion Glycoprotein (F)</h4>
+                <p>Inserted into the outer viral membrane. Drives the fusion of the viral envelope with the host cell membrane, creating multinucleated giant cells (syncytia).</p>
+            </div>
+            <div class="card">
+                <h4>Attachment Glycoprotein (G)</h4>
+                <p>Recognizes and binds to specific host cell receptors to initiate infection. Antibodies against the G protein are key to neutralizing viral infectivity.</p>
+            </div>
+            <div class="card">
+                <h4>Long Polymerase (L)</h4>
+                <p>The large viral RNA-dependent RNA polymerase enzyme responsible for synthesizing viral mRNA and replicating the negative-sense RNA genome.</p>
+            </div>
+        </div>
+
+        <h3>Accessory and Non-Structural Proteins</h3>
+        <ul>
+            <li><strong>V and W Proteins:</strong> Act as master immune-evasion factors, preventing the host cell from producing or responding to type I interferons by binding to cellular signaling proteins including STAT1, STAT2, RIG-I, and MDA5.</li>
+            <li><strong>C Protein:</strong> Resides in the host cell cytoplasm, regulates viral RNA synthesis, mediates virion release, and acts as a key factor in overall viral virulence.</li>
+        </ul>
+
+        <h3>Phylogeny and Viral Strains</h3>
+        <table>
+            <tr>
+                <th>Clade</th>
+                <th>Regions</th>
+                <th>Characteristics</th>
+            </tr>
+            <tr>
+                <td><strong>Malaysia Clade (NiV-M)</strong></td>
+                <td>Malaysia, Singapore, Cambodia, Thailand</td>
+                <td>Single uniform variant, spread rapidly through livestock industry</td>
+            </tr>
+            <tr>
+                <td><strong>Bangladesh Clade (NiV-B)</strong></td>
+                <td>Bangladesh, India</td>
+                <td>Diverse variants, multiple independent spillover events from bats</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Transmission -->
+    <section id="transmission">
+        <h2>🔄 Transmission Dynamics</h2>
+        <p>Nipah virus is transmitted via zoonotic spillover (animal-to-human) and direct human-to-human propagation, with dynamics heavily influenced by regional practices and viral lineages.</p>
+
+        <!-- Image placeholder for your transmission diagram -->
+        <div class="transmission-image-container">
+            <!-- Replace src with your uploaded image path -->
+            <img src="transmission.jpg" alt="Nipah Virus Transmission Diagram">
+            <!-- If you haven't uploaded yet, use this placeholder text -->
+            <!-- <div class="image-placeholder">📷 Upload your transmission diagram image here</div> -->
+        </div>
+
+        <h3>1. Interspecies Transmission</h3>
+        <ul>
+            <li><strong>Pig-to-Human (Malaysia/Singapore):</strong> Pigs acted as highly efficient intermediate and amplifying hosts. Fruit bats contaminated pigsties, pigs developed severe respiratory symptoms ("barking pig syndrome"), and transmitted to farm workers.</li>
+            <li><strong>Bat-to-Human (Bangladesh/India):</strong> Bypasses intermediate hosts. Spillover occurs through consumption of raw date palm sap contaminated by bats.</li>
+            <li><strong>Horse-to-Human (Philippines):</strong> Implicated horses as amplifying hosts in 2014 through direct contact or consumption of undercooked horse meat.</li>
+        </ul>
+
+        <h3>2. Human-to-Human Transmission</h3>
+        <p>Dominant in Bangladesh and India, accounting for ~50% of reported cases. Routes include:</p>
+        <ul>
+            <li>Close physical contact and respiratory droplets</li>
+            <li>Super-spreaders: critically ill patients with severe respiratory involvement</li>
+            <li>Nosocomial transmission in healthcare settings without adequate PPE</li>
+            <li>Corpse-to-human transmission during traditional funeral practices</li>
+        </ul>
+    </section>
+
+    <!-- Pathogenesis -->
+    <section id="pathogenesis">
+        <h2>🔬 Pathogenesis and Pathology</h2>
+        <p>The virus enters via the oro-nasal route, replicating in respiratory epithelial cells and lymphoid tissues. It enters the bloodstream, hitching a ride on host leukocytes without productive infection.</p>
+
+        <div class="danger-box">
+            <strong>Cell Tropism:</strong> The virus targets cells expressing <strong>Ephrin-B2</strong> (arterial endothelial cells, bronchial epithelial cells) and <strong>Ephrin-B3</strong> (central nervous system neurons and glial cells).
+        </div>
+
+        <h3>Histopathology</h3>
+        <ul>
+            <li>Formation of multinucleated giant syncytial cells</li>
+            <li>Widespread endothelial destruction leading to systemic small-vessel vasculitis</li>
+            <li>Fibrinoid necrosis, thrombosis, ischemia, and microinfarctions</li>
+            <li>Pulmonary pathology: alveolar hemorrhage, pulmonary edema, ARDS</li>
+        </ul>
+
+        <h3>CNS Invasion</h3>
+        <p>The virus invades the central nervous system through two pathways: hematogenously (disrupting the blood-brain barrier) or anterogradely from the nasal cavity via the olfactory nerves through the cribriform plate into the olfactory bulb.</p>
+    </section>
+
+    <!-- Clinical -->
+    <section id="clinical">
+        <h2>🏥 Clinical Manifestations</h2>
+        <p>The incubation period generally spans 3-14 days (mean of 8 days for NiV-M and 9.5 days for NiV-B).</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h4>Prodromal Phase</h4>
+                <p>High-grade fever, severe headache, myalgia, sore throat, vomiting, lethargy, and extreme weakness.</p>
+            </div>
+            <div class="card">
+                <h4>Encephalitic Syndrome</h4>
+                <p>Altered mental status, confusion, seizures, segmental myoclonus, cerebellar ataxia, and coma.</p>
+            </div>
+            <div class="card">
+                <h4>Respiratory Syndrome</h4>
+                <p>Prominent in NiV-B lineage (70-83% of cases): severe cough, dyspnea, rapid progression to ARDS.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <strong>Case Fatality Rate:</strong> Ranges from 40% to 100%. The NiV-B strain is associated with a significantly higher CFR (~75%) compared to NiV-M (40-50%).
+        </div>
+
+        <h3>Long-Term Sequelae</h3>
+        <ul>
+            <li><strong>Permanent Deficits:</strong> ~20-22% of survivors experience long-term neurological deficits.</li>
+            <li><strong>Neuropsychiatric:</strong> Depression, violent outbursts, nightmares, and bedwetting.</li>
+            <li><strong>Relapsed Encephalitis:</strong> Can occur months or years later (one case 11 years post-infection).</li>
+        </ul>
+    </section>
+
+    <!-- Diagnostics -->
+    <section id="diagnostics">
+        <h2>🔬 Diagnostic Modalities</h2>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>Use</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td><strong>RT-PCR</strong></td>
+                <td>Gold-standard during acute phase</td>
+                <td>Detects viral RNA in throat swabs, blood, urine, CSF</td>
+            </tr>
+            <tr>
+                <td><strong>IgM ELISA</strong></td>
+                <td>Detects acute infection</td>
+                <td>IgM appears in first week, peaks at 9 days, persists 3 months</td>
+            </tr>
+            <tr>
+                <td><strong>IgG ELISA</strong></td>
+                <td>Retrospective diagnosis</td>
+                <td>Appears in second week, persists over 8 months</td>
+            </tr>
+            <tr>
+                <td><strong>Virus Isolation</strong></td>
+                <td>BSL-4 laboratories only</td>
+                <td>Uses Vero-E6 cell lines, shows syncytial cells within 3 days</td>
+            </tr>
+            <tr>
+                <td><strong>Immunohistochemistry</strong></td>
+                <td>Post-mortem analysis</td>
+                <td>Visualizes viral antigens in vascular endothelial cells</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Treatment -->
+    <section id="treatment">
+        <h2>💊 Therapeutic Countermeasures</h2>
+        <p>Currently, there are <strong>no FDA-approved therapeutics</strong> or antiviral drugs licensed specifically for human NiV infection; clinical management is primarily supportive.</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h4>Supportive Care</h4>
+                <p>Maintaining fluid balance, managing intracranial pressure, treating seizures, and mechanical ventilation for ARDS.</p>
+            </div>
+            <div class="card">
+                <h4>Ribavirin</h4>
+                <p>Broad-spectrum guanosine analog. Open-label trial showed 36% relative reduction in mortality, but efficacy remains debated.</p>
+            </div>
+            <div class="card">
+                <h4>Remdesivir</h4>
+                <p>Adenosine analog. Pre-clinical studies show 100% protection in African green monkeys when initiated 24h post-infection.</p>
+            </div>
+            <div class="card">
+                <h4>Favipiravir</h4>
+                <p>Selective RNA polymerase inhibitor. 100% protection in golden hamsters when administered daily for two weeks.</p>
+            </div>
+            <div class="card">
+                <h4>m102.4 Antibody</h4>
+                <p>Humanized monoclonal antibody targeting G glycoprotein. Protected non-human primates up to 3 days post-exposure.</p>
+            </div>
+            <div class="card">
+                <h4>Fusion-Inhibitory Peptides</h4>
+                <p>Cholesterol-tagged peptides block host-cell entry. Showed survival benefit in animal models.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prevention -->
+    <section id="prevention">
+        <h2>🛡️ Prevention and Surveillance</h2>
+
+        <h3>Date Palm Sap Intervention</h3>
+        <p>Educational campaigns discourage raw sap consumption. Installing physical barriers like bamboo skirts ("banas") completely blocks bats from accessing the sap stream.</p>
+        <div class="success-box">
+            <strong>💡 Solution:</strong> Boiling raw sap or fermenting it into molasses effectively inactivates the virus.
+        </div>
+
+        <h3>Hospital Infection Control</h3>
+        <ul>
+            <li>Place patients in airborne isolation rooms (negative-pressure)</li>
+            <li>Healthcare workers must wear N95 respirators, gloves, gowns, and eye protection</li>
+            <li>Disinfect environmental surfaces with agents approved for enveloped viruses</li>
+        </ul>
+
+        <h3>Surveillance Systems</h3>
+        <p>Robust event-based, media-based, and sentinel surveillance systems are essential. "Clusters" of encephalitis (2+ cases within 21 days) trigger rapid investigation.</p>
+
+        <h3>"One Health" Approach</h3>
+        <p>Prevention requires coordinated strategy integrating medical, veterinary, and ecological systems to monitor bat-interface dynamics, land use, animal health, and human health.</p>
+
+        <h3>Vaccine Candidates (in development)</h3>
+        <ul>
+            <li><strong>Hendra G Subunit (HeV-sG):</strong> Registered for equine use in Australia; human Phase I trial underway</li>
+            <li><strong>VSV-NiV-G:</strong> Live-attenuated vector vaccine; 100% protection in non-human primates</li>
+            <li><strong>mRNA-1215:</strong> mRNA vaccine encoding prefusion F protein; Phase I clinical trial</li>
+            <li><strong>Virus-Like Particles (VLPs):</strong> Contain G, F, M proteins; full protection in golden hamsters</li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 Nipah Virus Research Information Page | Created for educational purposes</p>
+    <p>🔬 Data sourced from comprehensive scientific literature on Nipah Virus (NiV)</p>
+</footer>
+
+
+<a href="introduction.html" style="
+    display: inline-block;
+    padding: 16px 45px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    border-radius: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+    cursor: pointer;
+" onmouseover="this.style.background='rgba(255, 255, 255, 0.12)'; this.style.transform='translateY(-5px) scale(1.03)'; this.style.boxShadow='0 12px 40px rgba(0, 0, 0, 0.4)'; this.style.borderColor='rgba(255,255,255,0.3)'" 
+onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 20px rgba(0, 0, 0, 0.2)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+    <span style="margin-right: 10px;">🏠</span> Back to Introduction
+</a>
+
+
+
+
+  <a href="content table.html" style="
+        display: inline-block;
+        padding: 14px 40px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 25px rgba(102, 126, 234, 0.4);
+        letter-spacing: 1px;
+        border: none;
+        cursor: pointer;
+    " onmouseover="this.style.transform='translateY(-4px) scale(1.05)'; this.style.boxShadow='0 10px 50px rgba(102, 126, 234, 0.6)'" 
+    onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 25px rgba(102, 126, 234, 0.4)'">
+        📖Go to Table
+    </a>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title Here</title>
+    
+    <!-- CSS Styling (Internal) -->
+    <style>
+        /* Your styles go here */
+    </style>
+    
+    <!-- External CSS (Optional) -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nipah Virus — Transmission Dynamics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12181a;
+    --bg-raise: #1a2225;
+    --bg-card: #1d2528;
+    --line: #2c3639;
+    --bone: #ece5d6;
+    --bone-dim: #a9ac9e;
+    --muted: #7c8783;
+    --vermilion: #c1440e;
+    --vermilion-dim: #7a3013;
+    --teal: #4d8b81;
+    --teal-dim: #2c4b46;
+    --gold: #b8935a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--bone);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--vermilion); color:var(--bone); }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  a{ color:inherit; }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--gold); display:inline-block; }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em; }
+
+  /* ---------- HERO (image background) ---------- */
+  header.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    background-image:
+      linear-gradient(180deg, rgba(14,18,20,0.35) 0%, rgba(14,18,20,0.55) 45%, rgba(14,18,20,0.96) 92%),
+      url('https://commons.wikimedia.org/wiki/Special:FilePath/Indian%20flying%20foxes%20(Pteropus%20giganteus%20giganteus).jpg');
+    background-size:cover;
+    background-position:center 30%;
+    background-repeat:no-repeat;
+    padding:40px 0 64px;
+  }
+  .hero-top{
+    position:absolute; top:0; left:0; right:0;
+    padding:32px 0;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .hero-top .wrap{ display:flex; justify-content:space-between; align-items:center; width:100%; }
+  .brandmark{ font-family:'Fraunces', serif; font-style:italic; font-size:18px; color:var(--bone); }
+  .source-link{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:var(--bone);
+    text-decoration:none;
+    border:1px solid rgba(236,229,214,0.35);
+    padding:8px 14px;
+    border-radius:999px;
+    background:rgba(18,24,26,0.35);
+    backdrop-filter:blur(4px);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .source-link:hover{ border-color:var(--gold); background:rgba(18,24,26,0.6); }
+  .source-link .arrow{ color:var(--gold); margin-left:4px; }
+
+  .hero-inner{ position:relative; z-index:1; }
+  .hero-kicker{ font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.1em; color:var(--teal-light,#8fd0c4); text-transform:uppercase; margin-bottom:20px; }
+  h1.title{
+    font-size:clamp(42px, 7vw, 84px);
+    line-height:1.0;
+    max-width:920px;
+    color:var(--bone);
+    text-shadow:0 2px 24px rgba(0,0,0,0.35);
+  }
+  h1.title em{ font-style:italic; color:#e0876a; font-weight:400; }
+  .hero-sub{ max-width:600px; margin-top:22px; font-size:17px; color:#d7d2c4; }
+  .hero-caption{
+    margin-top:34px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:#8a938e;
+    letter-spacing:0.03em;
+  }
+
+  /* ---------- SECTION SHELLS ---------- */
+  section{ padding:96px 0; border-bottom:1px solid var(--line); }
+  .section-head{ max-width:680px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(28px,3.4vw,40px); color:var(--bone); margin-top:16px; }
+  .section-head p{ color:var(--bone-dim); margin-top:14px; font-size:16px; max-width:58ch; }
+
+  /* ---------- TABLE OF CONTENTS ---------- */
+  .toc-section{ padding-top:76px; }
+  .toc-list{ border-top:1px solid var(--line); }
+  .toc-item{
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    align-items:baseline;
+    gap:24px;
+    padding:26px 4px;
+    border-bottom:1px solid var(--line);
+    text-decoration:none;
+    color:inherit;
+    transition:padding-left .25s ease, color .25s ease;
+  }
+  .toc-item:hover{ padding-left:14px; color:var(--vermilion); }
+  .toc-item:hover .toc-go{ opacity:1; transform:translateX(0); }
+  .toc-num{ font-family:'IBM Plex Mono', monospace; color:var(--gold); font-size:14px; }
+  .toc-name{ font-family:'Fraunces', serif; font-size:23px; }
+  .toc-desc{ display:block; font-family:'IBM Plex Sans',sans-serif; font-size:13.5px; color:var(--muted); margin-top:4px; font-weight:400; }
+  .toc-go{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--vermilion); opacity:0; transform:translateX(-6px); transition:opacity .25s ease, transform .25s ease; }
+
+  /* ---------- INTRO ---------- */
+  .intro-grid{ display:grid; grid-template-columns:1.4fr 1fr; gap:64px; }
+  .intro-grid p{ color:var(--bone-dim); font-size:16.5px; margin-bottom:18px; max-width:62ch; }
+  .intro-grid p strong{ color:var(--bone); font-weight:500; }
+  .intro-facts{ display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); height:fit-content; }
+  .fact{ background:var(--bg-card); padding:20px 24px; }
+  .fact .k{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--gold); text-transform:uppercase; letter-spacing:0.06em; }
+  .fact .v{ font-family:'Fraunces', serif; font-size:19px; color:var(--bone); margin-top:6px; }
+
+  /* ---------- SPILLOVER SPLIT ---------- */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); }
+  .route{ background:var(--bg-card); padding:44px 40px 48px; position:relative; }
+  .route-tag{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; padding:4px 10px; border-radius:3px; display:inline-block; margin-bottom:22px; }
+  .route.malaysia .route-tag{ background:var(--teal-dim); color:#bfe0d9; }
+  .route.bangladesh .route-tag{ background:var(--vermilion-dim); color:#f3c9b3; }
+  .route h3{ font-size:26px; color:var(--bone); margin-bottom:6px; }
+  .route .species{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--muted); font-style:italic; margin-bottom:22px; }
+  .flow{ display:flex; align-items:center; gap:0; margin:26px 0 30px; flex-wrap:wrap; }
+  .flow-node{ font-family:'IBM Plex Mono', monospace; font-size:13px; padding:9px 14px; border:1px solid var(--line); border-radius:4px; background:var(--bg-raise); color:var(--bone); }
+  .flow-arrow{ color:var(--muted); padding:0 10px; font-size:15px; }
+  .route p.desc{ color:var(--bone-dim); font-size:15.5px; }
+  .route .note{ margin-top:20px; padding-top:20px; border-top:1px dashed var(--line); font-size:14px; color:var(--muted); }
+  .route .note strong{ color:var(--bone-dim); font-weight:500; }
+
+  /* ---------- H2H SECTION ---------- */
+  .h2h-top{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center; margin-bottom:64px; }
+  .big-stat{ font-family:'Fraunces', serif; font-size:clamp(90px,12vw,150px); font-weight:500; line-height:0.85; color:var(--vermilion); font-style:italic; }
+  .big-stat + p{ margin-top:18px; color:var(--bone-dim); font-size:16px; max-width:34ch; }
+  .modes{ display:grid; grid-template-columns:1fr; gap:1px; background:var(--line); border:1px solid var(--line); }
+  .mode{ background:var(--bg-card); padding:26px 28px; display:grid; grid-template-columns:34px 1fr; gap:18px; }
+  .mode .mk{ font-family:'IBM Plex Mono', monospace; color:var(--gold); font-size:13px; padding-top:3px; }
+  .mode h4{ font-family:'Fraunces', serif; font-weight:500; font-size:18px; color:var(--bone); margin-bottom:6px; }
+  .mode p{ font-size:14.5px; color:var(--bone-dim); }
+  .mode.danger h4{ color:var(--vermilion); }
+
+  /* ---------- DIAGRAM ---------- */
+  .diagram-shell{ background:var(--bg-raise); border:1px solid var(--line); padding:48px 8px 24px; }
+  .diagram-caption{ display:flex; justify-content:space-between; align-items:baseline; padding:0 40px 32px; flex-wrap:wrap; gap:12px; }
+  .diagram-caption h3{ font-size:22px; color:var(--bone); }
+  .diagram-legend{ display:flex; gap:22px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); }
+  .legend-dot{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; position:relative; top:-1px; }
+  svg .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding:60px 0 80px; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; }
+  footer .fmark{ font-family:'Fraunces', serif; font-style:italic; font-size:20px; color:var(--bone-dim); }
+  footer .fnote{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--muted); max-width:44ch; }
+  footer .fnote a{ color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold); }
+
+  @media (max-width: 860px){
+    .split{ grid-template-columns:1fr; }
+    .h2h-top{ grid-template-columns:1fr; gap:40px; }
+    .intro-grid{ grid-template-columns:1fr; }
+    .toc-item{ grid-template-columns:44px 1fr; }
+    .toc-go{ display:none; }
+    header.hero{ min-height:88vh; }
+    section{ padding:64px 0; }
+    .diagram-caption{ padding:0 20px 24px; }
+  }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="hero-top">
+    <div class="wrap">
+      <span class="brandmark">Field notes</span>
+      <a class="source-link" href="https://www.who.int/news-room/fact-sheets/detail/nipah-virus" target="_blank" rel="noopener">Source: WHO fact sheet <span class="arrow">↗</span></a>
+    </div>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-kicker">Henipavirus · Paramyxoviridae</div>
+    <h1 class="title">Nipah Virus:<br><em>Transmission Dynamics</em></h1>
+    <p class="hero-sub">Two spillover routes out of one bat reservoir — and the strain that, unlike its cousin, didn't stop at the first person it infected.</p>
+    <div class="hero-caption">Pteropus giganteus, the Indian flying fox — natural reservoir of Nipah virus</div>
+  </div>
+</header>
+
+<section class="toc-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+       </div>
+</section>
+
+<section id="introduction">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">01 — Introduction</div>
+      <h2>A single virus, telling two different stories</h2>
+    </div>
+    <div class="intro-grid">
+      <div class="reveal">
+        <p>Nipah virus was first identified in 1998 during an outbreak among pig farmers in Malaysia, and it takes its name from Kampung Sungai Nipah, the village where it was traced. It belongs to the genus <strong>Henipavirus</strong>, and its natural reservoir is the fruit bat genus <em>Pteropus</em>, commonly known as flying foxes, which carry the virus without becoming sick themselves.</p>
+        <p>What makes Nipah worth tracking closely isn't just its severity — infection can progress from fever to fatal encephalitis — but the fact that <strong>it doesn't spread the same way everywhere.</strong> The Malaysian strain, NiV‑M, moved from bats into pigs and then into the people who handled them, largely stopping there. The Bangladesh and India strain, NiV‑B, skips the intermediate animal entirely, passing from bats straight to people through contaminated food, and then — critically — from those people to others.</p>
+        <p>That second detail is what separates a contained agricultural outbreak from a hospital-and-household chain of transmission. Understanding both routes, covered in the two sections below, is the difference between a spillover event and a spreading one.</p>
+      </div>
+      <div class="intro-facts reveal">
+        <div class="fact"><div class="k">Natural reservoir</div><div class="v">Pteropus fruit bats</div></div>
+        <div class="fact"><div class="k">First identified</div><div class="v">1998, Malaysia</div></div>
+        <div class="fact"><div class="k">Genus</div><div class="v">Henipavirus</div></div>
+        <div class="fact"><div class="k">Strains covered here</div><div class="v">NiV‑M &amp; NiV‑B</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spillover">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">02 — Zoonotic spillover</div>
+      <h2>Two strains, two very different first steps</h2>
+      <p>Before Nipah ever passes between people, it has to leave its animal reservoir. The route it takes shapes everything downstream — including how easily it goes on to spread further.</p>
+    </div>
+
+    <div class="split">
+      <div class="route malaysia reveal">
+        <span class="route-tag">NiV‑M · Malaysia</span>
+        <h3>Through the pig barn</h3>
+        <div class="species">Sus domesticus — intermediate amplifying host</div>
+        <div class="flow">
+          <span class="flow-node">Fruit bat</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Infected pigs</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Farm worker</span>
+        </div>
+        <p class="desc">Transmission occurred via direct contact with the respiratory secretions, body fluids, or tissue of infected pigs — an occupational exposure concentrated among people who worked closely with livestock.</p>
+        <div class="note"><strong>Downstream effect:</strong> human‑to‑human spread from this route was extremely rare.</div>
+      </div>
+
+      <div class="route bangladesh reveal">
+        <span class="route-tag">NiV‑B · Bangladesh &amp; India</span>
+        <h3>Through the sap pot</h3>
+        <div class="species">Pteropus spp. — direct reservoir contact</div>
+        <div class="flow">
+          <span class="flow-node">Fruit bat</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Date palm sap</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-node">Person</span>
+        </div>
+        <p class="desc">Transmission occurs directly from bats to humans, typically through raw date palm sap harvested overnight. Bats lick the sap stream as it collects, contaminating the pot with saliva, urine, or feces. Eating fruit a bat has already bitten into carries the same risk.</p>
+        <div class="note"><strong>Downstream effect:</strong> this route seeds the chains of person‑to‑person spread described below.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="h2h">
+  <div class="wrap">
+    <div class="h2h-top">
+      <div class="reveal">
+        <div class="eyebrow">03 — Human‑to‑human</div>
+        <div class="big-stat">½</div>
+        <p>Roughly half of all NiV‑B cases in Bangladesh and India are acquired from another infected person, not from an animal or contaminated food. In Malaysian outbreaks, this mode of spread was a rare exception — in South Asia, it's a defining feature.</p>
+      </div>
+
+      <div class="modes reveal">
+        <div class="mode">
+          <span class="mk">01</span>
+          <div><h4>Droplets &amp; aerosols</h4><p>Close contact with respiratory droplets, saliva, or urine from an infected person.</p></div>
+        </div>
+        <div class="mode danger">
+          <span class="mk">02</span>
+          <div><h4>Super‑spreaders</h4><p>Critically ill patients over 25 with severe respiratory involvement carry a high viral load in their secretions and act as the primary drivers of hospital and community outbreaks.</p></div>
+        </div>
+        <div class="mode">
+          <span class="mk">03</span>
+          <div><h4>Healthcare &amp; corpse contact</h4><p>Nosocomial spread to staff and visitors is common without proper PPE. Handling bodies of the deceased during traditional funerals is also high‑risk.</p></div>
+        </div>
+      </div>
+    </div>
+
+   
+        
+<footer>
+  <div class="wrap">
+    <div class="fmark">Nipah virus — transmission dynamics</div>
+</div>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  items.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<br><br>
+
+             <header>
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    <li>
+      <a href="content table.html" style="
+        display: inline-block;
+        text-decoration: none;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #1e3a5f;
+        background: #ffffff;
+        padding: 12px 28px;
+        border-radius: 40px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border: 1px solid #e9edf4;
+        transition: 0.2s;
+      " 
+      onmouseover="this.style.background='#1e3a5f'; this.style.color='white'; this.style.boxShadow='0 8px 24px rgba(30,58,95,0.25)';"
+      onmouseout="this.style.background='#ffffff'; this.style.color='#1e3a5f'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.05)';"
+      >
+        🎥 Content Table of Nipah
+      </a>
+    </li>
+  </ul>
+</header>
+<br><br>
+
+             <header>
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    <li>
+      <a href="overview2.html" style="
+        display: inline-block;
+        text-decoration: none;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #1e3a5f;
+        background: #ffffff;
+        padding: 12px 28px;
+        border-radius: 40px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border: 1px solid #e9edf4;
+        transition: 0.2s;
+      " 
+      onmouseover="this.style.background='#1e3a5f'; this.style.color='white'; this.style.boxShadow='0 8px 24px rgba(30,58,95,0.25)';"
+      onmouseout="this.style.background='#ffffff'; this.style.color='#1e3a5f'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.05)';"
+      >
+        🗺️ Overview of Nipah
+      </a>
+    </li>
+  </ul>
+</header>
+  
+
+<br><br>
+
+             <header>
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    <li>
+      <a href="introduction.html" style="
+        display: inline-block;
+        text-decoration: none;
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #1e3a5f;
+        background: #ffffff;
+        padding: 12px 28px;
+        border-radius: 40px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border: 1px solid #e9edf4;
+        transition: 0.2s;
+      " 
+      onmouseover="this.style.background='#1e3a5f'; this.style.color='white'; this.style.boxShadow='0 8px 24px rgba(30,58,95,0.25)';"
+      onmouseout="this.style.background='#ffffff'; this.style.color='#1e3a5f'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.05)';"
+      >
+        🏠introduction of Nipah
+      </a>
+    </li>
+  </ul>
+</header>
+
+
+
+
+
+
+
+    <!-- All visible content goes here -->
+    
+    <!-- JavaScript (Internal) -->
+    <script>
+        /* Your JavaScript code here */
+    </script>
+    
+    <!-- External JavaScript (Optional) -->
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nipah Virus — Research Papers &amp; References</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eef1f0;
+    --paper-card:#f7f8f7;
+    --ink:#16262b;
+    --ink-soft:#3c5158;
+    --ink-faint:#7f9096;
+    --line:#c3cdc9;
+    --line-soft:#dbe2df;
+    --teal:#2f6b6a;
+    --teal-deep:#1c4746;
+    --teal-soft:#e3ece9;
+    --amber:#a8672b;
+    --amber-soft:#f2e6d8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(47,107,106,0.06) 0%, transparent 45%),
+      linear-gradient(var(--line-soft) 1px, transparent 1px);
+    background-size:auto, 100% 2.6rem;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:3.5rem 1.25rem 5rem;
+  }
+  .sheet{
+    max-width:1180px;
+    width:100%;
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    box-shadow:0 1px 0 rgba(22,38,43,0.04), 0 30px 60px -30px rgba(22,38,43,0.4);
+  }
+
+  header{padding:2.8rem 3.2rem 2rem; border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--teal-deep); display:flex; align-items:center; gap:0.6rem;
+    margin-bottom:1.1rem;
+  }
+  .eyebrow::before{
+    content:""; width:0.5rem; height:0.5rem; background:var(--teal);
+    border-radius:50%; box-shadow:0 0 0 3px var(--teal-soft);
+  }
+  h1{
+    font-family:'Source Serif 4', serif;
+    font-weight:600; font-size:2.6rem; letter-spacing:-0.015em; line-height:1.06;
+  }
+  h1 em{font-style:italic; font-weight:500; color:var(--ink-soft);}
+  header p.sub{margin-top:1rem; color:var(--ink-soft); font-size:0.98rem; max-width:60ch; line-height:1.6;}
+
+  /* Combined horizontal navigation */
+  .home-btn-wrap{
+    padding:1.4rem 3.2rem 0; 
+    display:flex; 
+    justify-content:flex-start; 
+    align-items:center; 
+    flex-wrap:wrap; 
+    gap:1rem;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem; letter-spacing:0.05em; text-transform:uppercase;
+    text-decoration:none; padding:0.8rem 1.5rem;
+    border:1px solid var(--teal-deep);
+    display:inline-flex; align-items:center; gap:0.5rem;
+    transition:background .15s ease, color .15s ease, transform .15s ease;
+    color:var(--teal-deep); background:transparent;
+  }
+  .btn:hover{background:var(--teal-soft); transform:translateY(-2px);}
+  .search-note{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--ink-faint); letter-spacing:0.04em;
+    margin-left: auto; /* Pushes this to the far right */
+  }
+
+  /* search box */
+  .search-wrap{padding:1.8rem 3.2rem 0;}
+  #search{
+    width:100%;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.95rem;
+    padding:0.85rem 1.1rem;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  #search:focus{border-color:var(--teal);}
+  #search::placeholder{color:var(--ink-faint);}
+
+  /* list */
+  .list-wrap{padding:2rem 3.2rem 1rem;}
+  .list-label{
+    display:flex; align-items:baseline; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--ink-faint); margin-bottom:1.2rem;
+    border-bottom:1px solid var(--line); padding-bottom:0.9rem;
+  }
+
+  .paper-list{list-style:none;}
+  .paper-row{
+    display:grid;
+    grid-template-columns: 46px 1fr auto;
+    align-items:center;
+    gap:1.4rem;
+    padding:1.15rem 0;
+    border-bottom:1px solid var(--line-soft);
+    text-decoration:none;
+    color:inherit;
+    transition:background .15s ease, padding .18s ease;
+  }
+  .paper-row:hover{
+    background:var(--teal-soft);
+    padding-left:0.6rem; margin-left:-0.6rem;
+    padding-right:0.6rem; margin-right:-0.6rem;
+  }
+  .paper-row .num{
+    font-family:'Source Serif 4', serif; font-style:italic; font-weight:500;
+    font-size:1.35rem; color:var(--line); line-height:1;
+    transition:color .15s ease;
+  }
+  .paper-row:hover .num{color:var(--teal);}
+  .paper-meta .title{
+    font-size:1rem; font-weight:500; color:var(--ink); line-height:1.4;
+  }
+  .paper-meta .authors{
+    margin-top:0.3rem;
+    font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--ink-faint); letter-spacing:0.02em;
+  }
+  .paper-meta .authors .journal{color:var(--teal-deep);}
+  .paper-row .go{
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem; letter-spacing:0.05em;
+    text-transform:uppercase; color:var(--teal-deep);
+    display:flex; align-items:center; gap:0.4rem; white-space:nowrap;
+  }
+  .paper-row .go .arrow{opacity:0; transform:translateX(-4px); transition:opacity .15s ease, transform .15s ease;}
+  .paper-row:hover .go .arrow{opacity:1; transform:translateX(0);}
+  .paper-row.hidden{display:none;}
+
+  .empty-note{
+    padding:2rem 0; text-align:center; color:var(--ink-faint);
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem; display:none;
+  }
+
+  /* how-to-add note */
+  .howto{
+    margin:1.6rem 3.2rem 0;
+    background:var(--amber-soft);
+    border:1px solid var(--amber);
+    border-left:4px solid var(--amber);
+    padding:1.3rem 1.6rem;
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+  .howto strong{color:var(--ink);}
+  .howto code{
+    font-family:'IBM Plex Mono', monospace;
+    background:rgba(255,255,255,0.5);
+    padding:0.1rem 0.4rem;
+    font-size:0.82rem;
+    border:1px solid var(--line);
+  }
+
+  footer.report-foot{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.6rem;
+    padding:1.3rem 3.2rem 2rem; margin-top:1.6rem; border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; color:var(--ink-faint); letter-spacing:0.04em;
+  }
+
+  @media (max-width:760px){
+    header, .home-btn-wrap, .search-wrap, .list-wrap, footer.report-foot{padding-left:1.4rem; padding-right:1.4rem;}
+    .howto{margin-left:1.4rem; margin-right:1.4rem;}
+    h1{font-size:2rem;}
+    .paper-row{grid-template-columns:32px 1fr; row-gap:0.4rem;}
+    .paper-row .go{grid-column:2/3;}
+    .search-note{margin-left:0; width:100%; text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="eyebrow">Reference Series &middot; Nipah Virus</div>
+    <h1>Research papers <em>&amp; sources</em></h1>
+    <p class="sub">Every source cited in this report, linked directly to the original article, journal page, or preprint. Click any title to open it in a new tab.</p>
+  </header>
+
+  <!-- SINGLE HORIZONTAL NAV WRAP -->
+  <div class="home-btn-wrap">
+    <a href="introduction.html" class="btn">🏠 Back to Introduction</a>
+    <a href="fda_approved_drugs.html" class="btn">🗺️ FDA Approved Drugs Home Page</a>
+    <a href="content table.html" class="btn">🎥 Content Table of Nipah</a>
+    <span class="search-note" id="count-note">— papers listed</span>
+  </div>
+  <!-- END SINGLE HORIZONTAL NAV WRAP -->
+
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search by title, author, or journal…">
+  </div>
+
+  <div class="list-wrap">
+    <div class="list-label">
+      <span>Bibliography</span>
+      <span>Opens original source in new tab</span>
+    </div>
+
+    <ul class="paper-list" id="paper-list">
+      <!-- ===================================================================
+           SAMPLE ENTRIES — replace title / authors / journal / href with
+           your real papers. Copy one <li> block per paper. Order doesn't
+           matter; numbers renumber automatically.
+      ==================================================================== -->
+      <li>
+        <a class="paper-row" href="https://www.sciencedirect.com/science/article/pii/S0002944010644938" target="_blank" rel="noopener noreferrer">
+          <span class="num">01</span>
+          <span class="paper-meta">
+            <span class="title">Nipah Virus Infection Pathology and Pathogenesis of an Emerging Paramyxoviral Zoonosis</span>
+            <span class="authors">Chua, K.B. et al. &middot; <span class="journal">American Journal of Pathology,</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6881878/" target="_blank" rel="noopener noreferrer">
+          <span class="num">02</span>
+          <span class="paper-meta">
+            <span class="title">Nipah Virus Infection in Kozhikode, Kerala, South India, in 
+2018: Epidemiology of an Outbreak of an Emerging Disease</span>
+            <span class="authors"><span class="journal">indian journal of community medicine</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11460887/" target="_blank" rel="noopener noreferrer">
+          <span class="num">03</span>
+          <span class="paper-meta">
+            <span class="title">A systematic review of case reports on mortality, 
+modes of infection, diagnostic tests, and 
+treatments for Nipah virus infection</span>
+            <span class="authors"><span class="journal">Systematic Review and Meta-Analysis</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11460887/" target="_blank" rel="noopener noreferrer">
+          <span class="num">04</span>
+          <span class="paper-meta">
+            <span class="title">Nipah virus: epidemiology, pathology,
+immunobiology and advances in diagnosis,
+vaccine designing and control strategies – a
+comprehensive review</span>
+            <span class="authors"><span class="journal">Veterinary Quarterly</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://www.cambridge.org/core/journals/epidemiology-and-infection/article/nipah-virus-infection-a-review/4D3B54325AF2E6BB45C34E96EA71D66E" target="_blank" rel="noopener noreferrer">
+          <span class="num">05</span>
+          <span class="paper-meta">
+            <span class="title">Nipah virus infection: A review</span>
+            <span class="authors"><span class="journal">Epidemiology and Infection
+cambridge.org/hyg</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/rmv.2010" target="_blank" rel="noopener noreferrer">
+          <span class="num">06</span>
+          <span class="paper-meta">
+            <span class="title">Emerging trends of Nipah virus: A review</span>
+            <span class="authors"><span class="journal">WILEY</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://link.springer.com/article/10.1186/s12245-025-00916-1" target="_blank" rel="noopener noreferrer">
+          <span class="num">07</span>
+          <span class="paper-meta">
+            <span class="title">Nipah virus: a summary for clinicians</span>
+            <span class="authors"><span class="journal">International Journal of 
+Emergency Medicine</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://www.mdpi.com/1999-4915/16/2/179" target="_blank" rel="noopener noreferrer">
+          <span class="num">08</span>
+          <span class="paper-meta">
+            <span class="title">Nipah Virus: A Multidimensional Update</span>
+            <span class="authors"><span class="journal">MDPI</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <li>
+        <a class="paper-row" href="https://pubs.acs.org/doi/abs/10.1021/acsinfecdis.6c00206" target="_blank" rel="noopener noreferrer">
+          <span class="num">09</span>
+          <span class="paper-meta">
+            <span class="title">Repurposing Clinical Candidates for Nipah and Hendra Viruses</span>
+            <span class="authors"><span class="journal">ACS Indectious Diseases</span></span>
+          </span>
+          <span class="go">Open <span class="arrow">→</span></span>
+        </a>
+      </li>
+
+      <!-- Add more <li> blocks below this line -->
+    </ul>
+
+    <div class="empty-note" id="empty-note">No papers match your search.</div>
+  </div>
+
+  <div class="howto">
+    <strong>Here, you can find the research papers I have explored. Feel free to visit them one by one, read them, and learn more about Nipah virus.</strong>  </div>
+
+  <footer class="report-foot">
+    <span>Nipah virus reference series &middot; bibliography</span>
+    <span>All links open the original source in a new tab</span>
+  </footer>
+
+</div>
+
+<script>
+  const searchInput = document.getElementById('search');
+  const rows = Array.from(document.querySelectorAll('.paper-row'));
+  const listItems = Array.from(document.querySelectorAll('#paper-list > li'));
+  const emptyNote = document.getElementById('empty-note');
+  const countNote = document.getElementById('count-note');
+
+  function renumber(visibleRows){
+    visibleRows.forEach((row, i) => {
+      row.querySelector('.num').textContent = String(i + 1).padStart(2, '0');
+    });
+  }
+
+  function updateCount(){
+    countNote.textContent = rows.length + (rows.length === 1 ? ' paper listed' : ' papers listed');
+  }
+  updateCount();
+  renumber(rows);
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    let visible = [];
+    listItems.forEach(li => {
+      const row = li.querySelector('.paper-row');
+      const text = row.textContent.toLowerCase();
+      const match = text.includes(q);
+      li.style.display = match ? '' : 'none';
+      if (match) visible.push(row);
+    });
+    renumber(visible);
+    emptyNote.style.display = visible.length === 0 ? 'block' : 'none';
+  });
+</script>
+
+</body>
+</html>

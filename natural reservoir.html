@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nipah Virus · Natural Reservoir</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    /* ----- reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+      background: #0c0b0a;
+      color: #ede8e0;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      background-image: radial-gradient(circle at 20% 30%, #1f1a12 0%, #0c0b0a 80%);
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ----- glass-morphism cards ----- */
+    .glass {
+      background: rgba(26, 22, 18, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(200, 160, 100, 0.15);
+      border-radius: 48px;
+      padding: 2.2rem 2.6rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      transition: all 0.25s ease;
+    }
+
+    .glass:hover {
+      border-color: rgba(200, 160, 100, 0.3);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    /* ----- header ----- */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2.8rem;
+      gap: 1rem 1.5rem;
+    }
+
+    .header-left h1 {
+      font-size: 3rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .header-left h1 i {
+      color: #d4a853;
+      font-size: 2.6rem;
+    }
+
+    .header-left .sub {
+      font-size: 1.1rem;
+      color: #bfa88a;
+      margin-top: 6px;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+    }
+
+    .header-left .sub .pill {
+      background: rgba(180, 150, 80, 0.2);
+      padding: 0.2rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      letter-spacing: 0.4px;
+      border: 1px solid rgba(200, 160, 100, 0.2);
+      color: #d6bea6;
+    }
+
+    /* ----- navigation links (content table + introduction) ----- */
+    .nav-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      background: rgba(18, 15, 12, 0.5);
+      padding: 0.4rem 0.4rem;
+      border-radius: 80px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(200, 160, 100, 0.1);
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.5rem 1.6rem;
+      border-radius: 60px;
+      text-decoration: none;
+      color: #dfceb0;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: 0.2s;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+
+    .nav-links a i {
+      color: #d4a853;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      background: rgba(180, 150, 80, 0.15);
+      border-color: rgba(200, 160, 100, 0.25);
+      color: white;
+    }
+
+    .nav-links a.active {
+      background: rgba(180, 150, 80, 0.2);
+      border-color: rgba(200, 160, 100, 0.3);
+      color: white;
+    }
+
+    /* ----- main grid (2 columns on large) ----- */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-top: 1.2rem;
+    }
+
+    /* ----- cards inside grid ----- */
+    .card {
+      background: rgba(20, 17, 14, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 36px;
+      padding: 1.8rem 2rem;
+      border: 1px solid rgba(200, 160, 100, 0.08);
+      transition: 0.25s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover {
+      border-color: rgba(200, 160, 100, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(200, 160, 100, 0.1);
+      padding-bottom: 0.7rem;
+    }
+
+    .card h2 i {
+      color: #d4a853;
+      font-size: 1.6rem;
+      width: 2rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #dfceb0;
+      margin: 1.2rem 0 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h3 i {
+      color: #b8986a;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin-bottom: 0.8rem;
+      color: #d8d2c8;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0.2rem;
+      margin: 0.6rem 0 0.8rem 0;
+    }
+
+    .card ul li {
+      margin-bottom: 0.6rem;
+      padding-left: 1.8rem;
+      position: relative;
+    }
+
+    .card ul li::before {
+      content: "◆";
+      color: #d4a853;
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem;
+      top: 0.1rem;
+    }
+
+    .card ul li strong {
+      color: #efe6d6;
+      font-weight: 500;
+    }
+
+    /* species chips */
+    .species-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 0.8rem 0 0.2rem 0;
+    }
+
+    .chip {
+      background: rgba(120, 100, 60, 0.25);
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(200, 160, 100, 0.1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #dfceb0;
+    }
+
+    .chip i {
+      color: #d4a853;
+      font-size: 0.8rem;
+    }
+
+    .chip em {
+      font-style: italic;
+    }
+
+    /* highlight box */
+    .insight {
+      background: rgba(80, 70, 40, 0.3);
+      border-left: 4px solid #d4a853;
+      padding: 0.8rem 1.4rem;
+      border-radius: 16px;
+      margin: 1rem 0 0.2rem 0;
+      backdrop-filter: blur(4px);
+    }
+
+    .insight i {
+      color: #d4a853;
+      margin-right: 10px;
+    }
+
+    /* stat pills */
+    .stat-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+
+    .stat-pill {
+      background: rgba(100, 80, 50, 0.3);
+      padding: 0.3rem 1.4rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(200, 160, 100, 0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: 0.15s;
+    }
+
+    .stat-pill i {
+      color: #d4a853;
+    }
+
+    .stat-pill:hover {
+      background: rgba(140, 110, 70, 0.25);
+      border-color: rgba(200, 160, 100, 0.2);
+    }
+
+    /* full-width card */
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* ----- interactive features (map + timeline) ----- */
+    .interactive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-top: 1.8rem;
+    }
+
+    .interactive-card {
+      background: rgba(20, 17, 14, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 36px;
+      padding: 1.5rem;
+      border: 1px solid rgba(200, 160, 100, 0.08);
+      transition: 0.25s ease;
+    }
+
+    .interactive-card:hover {
+      border-color: rgba(200, 160, 100, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .interactive-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+      color: #dfceb0;
+    }
+
+    .interactive-card h3 i {
+      color: #d4a853;
+    }
+
+    #map {
+      height: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* timeline styles */
+    .timeline-slider {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #1f1a12, #d4a853);
+      border-radius: 3px;
+      outline: none;
+      accent-color: #d4a853;
+      cursor: pointer;
+    }
+
+    .timeline-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: #9f8a7a;
+      margin-top: 4px;
+    }
+
+    .timeline-content {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      min-height: 70px;
+    }
+
+    .timeline-text {
+      color: #d8d2c8;
+    }
+
+    .timeline-text strong {
+      color: #ede8e0;
+    }
+
+    .timeline-text .desc {
+      color: #9f8a7a;
+      font-size: 0.9rem;
+    }
+
+    /* footer */
+    .footer {
+      margin-top: 2.8rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(200, 160, 100, 0.08);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: #9f8a7a;
+    }
+
+    .footer i {
+      color: #b8986a;
+      margin-right: 6px;
+    }
+
+    /* ----- responsive ----- */
+    @media (max-width: 900px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .interactive-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links {
+        border-radius: 40px;
+        justify-content: center;
+        padding: 0.4rem;
+      }
+      .nav-links a {
+        padding: 0.4rem 1rem;
+        font-size: 0.85rem;
+      }
+      .header-left h1 {
+        font-size: 2.4rem;
+      }
+      .glass {
+        padding: 1.5rem;
+        border-radius: 32px;
+      }
+      #map {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .header-left h1 {
+        font-size: 1.8rem;
+      }
+      .card {
+        padding: 1.2rem;
+      }
+      .chip {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.8rem;
+      }
+      .stat-pill {
+        font-size: 0.75rem;
+        padding: 0.2rem 1rem;
+      }
+      .interactive-card {
+        padding: 1rem;
+      }
+      #map {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ====== HEADER with NAV LINKS ====== -->
+  <div class="header">
+    <div class="header-left">
+      <h1>
+        <i class="fas fa-bat"></i>
+        Natural Reservoir
+      </h1>
+      <div class="sub">
+        <span><i class="fas fa-paw"></i> Genus <em>Pteropus</em> · flying foxes</span>
+        <span class="pill"><i class="far fa-clock"></i> co-evolution · silent harboring</span>
+      </div>
+    </div>
+
+    <!-- navigation: content table & introduction (links to .html files) -->
+    <div class="nav-links">
+      <a href="content table.html" class="active"><i class="fas fa-table"></i> 📖Content Table</a>
+      <a href="introduction.html"><i class="fas fa-book-open"></i>🏠 Introduction</a>
+      <!-- you can change href to actual .html files, e.g. "content-table.html" and "introduction.html" -->
+    </div>
+  </div>
+
+  <!-- ====== MAIN GLASS WRAPPER ====== -->
+  <div class="glass">
+
+    <!-- grid 2 columns -->
+    <div class="grid-2">
+
+      <!-- CARD 1: Gentle Hosts -->
+      <div class="card">
+        <h2><i class="fas fa-dove"></i> Gentle Hosts</h2>
+        <p>The evolutionary home of Nipah virus lies within fruit bats of the genus <strong><em>Pteropus</em></strong>, spanning Asia, Oceania, and Africa — directly overlapping with every documented outbreak zone.</p>
+
+        <h3><i class="fas fa-map-pin"></i> Key reservoir species</h3>
+        <div class="species-wrap">
+          <span class="chip"><i class="fas fa-location-dot"></i> <em>P. giganteus</em> <span style="opacity:0.7; margin-left:4px;">India · Bangladesh</span></span>
+          <span class="chip"><i class="fas fa-location-dot"></i> <em>P. vampyrus</em> <span style="opacity:0.7; margin-left:4px;">Malaysia · Indonesia</span></span>
+          <span class="chip"><i class="fas fa-location-dot"></i> <em>P. hypomelanus</em> <span style="opacity:0.7; margin-left:4px;">Malaysia · Indonesia</span></span>
+          <span class="chip"><i class="fas fa-location-dot"></i> <em>P. lylei</em> <span style="opacity:0.7; margin-left:4px;">Thailand · Cambodia</span></span>
+        </div>
+
+        <h3 style="margin-top:1rem;"><i class="fas fa-dna"></i> Other bat species</h3>
+        <ul>
+          <li><strong><em>Rousettus amplexicaudatus</em></strong> (cave bat) – East Timor</li>
+          <li><strong><em>Eidolon helvum</em></strong> (straw-coloured fruit bat) – Ghana</li>
+        </ul>
+        <div class="insight">
+          <i class="fas fa-globe-asia"></i> <em>Pteropus</em> distribution directly overlaps with every Nipah outbreak zone.
+        </div>
+      </div>
+
+      <!-- CARD 2: Co-Evolution & Silent Harboring -->
+      <div class="card">
+        <h2><i class="fas fa-leaf"></i> Co-Evolution</h2>
+        <p>Nipah virus has co-evolved with its bat hosts over centuries, exerting virtually no virulence on its natural reservoir.</p>
+        <ul>
+          <li><strong>Subclinical Carrying:</strong> Bats remain healthy with no pathological damage.</li>
+          <li><strong>Environmental Dissemination:</strong> Shed in saliva, urine, feces, and seminal fluid.</li>
+          <li><strong>Environmental Stability:</strong> Half-life of <strong>18 hours</strong> in bat urine; survives days in fruit pulp or palm sap.</li>
+        </ul>
+        <div class="stat-group">
+          <span class="stat-pill"><i class="fas fa-clock"></i> half-life: 18 h</span>
+          <span class="stat-pill"><i class="fas fa-droplet"></i> shed in multiple fluids</span>
+        </div>
+      </div>
+
+      <!-- CARD 3: Antiviral Shields (full width) -->
+      <div class="card full-width">
+        <h2><i class="fas fa-shield-halved"></i> Antiviral Shields</h2>
+        <p>The biological secret behind bats' tolerance lies in their extraordinary, adapted immune system.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 1rem 0;">
+          <div style="background: rgba(80, 70, 40, 0.2); padding: 0.8rem 1.2rem; border-radius: 24px; border-left: 3px solid #d4a853;">
+            <h3 style="margin:0 0 0.2rem 0; font-size:1rem; color:#d6bea6;"><i class="fas fa-bolt"></i> Constitutive IFN-α</h3>
+            <p style="font-size:0.9rem; margin:0;">Permanently active interferon system — immediate restriction without chronic inflammation.</p>
+          </div>
+          <div style="background: rgba(80, 70, 40, 0.2); padding: 0.8rem 1.2rem; border-radius: 24px; border-left: 3px solid #d4a853;">
+            <h3 style="margin:0 0 0.2rem 0; font-size:1rem; color:#d6bea6;"><i class="fas fa-lock"></i> Tetherin</h3>
+            <p style="font-size:0.9rem; margin:0;">Blocks viral replication and budding within bat cells.</p>
+          </div>
+          <div style="background: rgba(80, 70, 40, 0.2); padding: 0.8rem 1.2rem; border-radius: 24px; border-left: 3px solid #d4a853;">
+            <h3 style="margin:0 0 0.2rem 0; font-size:1rem; color:#d6bea6;"><i class="fas fa-hourglass-half"></i> Delayed Clearance</h3>
+            <p style="font-size:0.9rem; margin:0;">Low B-cell affinity maturation → low-titer antibodies → viral persistence.</p>
+          </div>
+        </div>
+
+        <div class="insight" style="border-left-color: #b6a86a;">
+          <i class="fas fa-lightbulb" style="color:#b6a86a;"></i> <strong>Key insight:</strong> permanent IFN shield + tetherin + delayed clearance = viral persistence without disease.
+        </div>
+
+        <div class="stat-group">
+          <span class="stat-pill"><i class="fas fa-bolt"></i> IFN-α: always on</span>
+          <span class="stat-pill"><i class="fas fa-virus-slash"></i> tetherin blocks budding</span>
+          <span class="stat-pill"><i class="fas fa-dna"></i> low B-cell maturation</span>
+        </div>
+      </div>
+
+    </div> <!-- end grid-2 -->
+
+    <!-- ====== INTERACTIVE FEATURES: MAP + TIMELINE ====== -->
+    <div class="interactive-grid">
+
+      <!-- MAP -->
+      <div class="interactive-card">
+        <h3><i class="fas fa-map"></i> Outbreak &amp; Bat Distribution</h3>
+        <div id="map"></div>
+        <p style="font-size:0.8rem; color:#9f8a7a; margin-top:0.5rem; text-align:center;">
+          <span style="color:#ff6b6b;">●</span> Outbreak locations &nbsp;·&nbsp; <span style="color:#d4a853;">●</span> Bat species distribution
+        </p>
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="interactive-card">
+        <h3><i class="fas fa-clock"></i> Outbreak Timeline (1997–1999)</h3>
+        <input type="range" id="timeline-slider" class="timeline-slider" min="1997" max="1999.5" step="0.5" value="1998" />
+        <div class="timeline-labels">
+          <span>Jan 1997</span>
+          <span>Jul 1997</span>
+          <span>Jan 1998</span>
+          <span>Jul 1998</span>
+          <span>Jan 1999</span>
+          <span>May 1999</span>
+        </div>
+        <div class="timeline-content">
+          <div id="timeline-text" class="timeline-text">
+            <strong>First human case</strong> — Jan 1997<br>
+            <span class="desc">A pig farmer in Ipoh, Perak shows symptoms.</span>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- end interactive-grid -->
+
+    <!-- ====== FOOTER ====== -->
+    <div class="footer">
+      <span><i class="fas fa-book-open"></i> Source: The Natural Reservoir of Nipah Virus</span>
+    </div>
+
+  </div> <!-- end glass -->
+
+</div> <!-- end container -->
+
+<!-- ====== MAP JAVASCRIPT ====== -->
+<script>
+  // Initialize map
+  const map = L.map('map').setView([4.0, 102.0], 5);
+
+  // Add tile layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Outbreak locations (Malaysia 1998-1999)
+  const outbreakLocations = [
+    { lat: 4.6, lng: 101.1, name: 'Ipoh, Perak (first case)' },
+    { lat: 2.7, lng: 101.9, name: 'Sikamat, Negeri Sembilan' },
+    { lat: 2.5, lng: 102.0, name: 'Bukit Pelandok (largest cluster)' },
+    { lat: 1.3, lng: 103.8, name: 'Singapore (spillover)' }
+  ];
+
+  // Add markers (red for outbreaks)
+  outbreakLocations.forEach(loc => {
+    const redIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+    L.marker([loc.lat, loc.lng], { icon: redIcon })
+      .addTo(map)
+      .bindPopup(`<b>${loc.name}</b>`);
+  });
+
+  // Add bat species distribution (gold/amber circles)
+  const batRegions = [
+    { lat: 24.0, lng: 78.0, name: 'P. giganteus (India)' },
+    { lat: 23.0, lng: 90.0, name: 'P. giganteus (Bangladesh)' },
+    { lat: 4.0, lng: 102.0, name: 'P. vampyrus (Malaysia)' },
+    { lat: -5.0, lng: 115.0, name: 'P. vampyrus (Indonesia)' },
+    { lat: 15.0, lng: 105.0, name: 'P. lylei (Thailand/Cambodia)' }
+  ];
+
+  batRegions.forEach(region => {
+    L.circle([region.lat, region.lng], {
+      color: '#d4a853',
+      fillColor: '#d4a853',
+      fillOpacity: 0.2,
+      radius: 200000
+    }).addTo(map).bindPopup(`<b>${region.name}</b>`);
+  });
+
+  // Add legend
+  const legend = L.control({ position: 'bottomright' });
+  legend.onAdd = function() {
+    const div = L.DomUtil.create('div', 'info legend');
+    div.style.background = 'rgba(0,0,0,0.7)';
+    div.style.color = 'white';
+    div.style.padding = '10px';
+    div.style.borderRadius = '8px';
+    div.style.fontSize = '0.8rem';
+    div.innerHTML = `
+      <div><span style="color:#ff6b6b;">●</span> Outbreak locations</div>
+      <div><span style="color:#d4a853;">●</span> Bat species distribution</div>
+    `;
+    return div;
+  };
+  legend.addTo(map);
+
+  // ====== TIMELINE JAVASCRIPT ======
+  const timelineData = {
+    1997: {
+      title: "First human case",
+      description: "A pig farmer in Ipoh, Perak shows symptoms of what would later be identified as Nipah virus."
+    },
+    1997.5: {
+      title: "Initial misdiagnosis",
+      description: "Outbreak initially attributed to Japanese encephalitis (JE). Mass vaccination campaigns begin."
+    },
+    1998: {
+      title: "Outbreak expands",
+      description: "Cases spread to Sikamat, Negeri Sembilan. Farmers report 'barking pig syndrome'."
+    },
+    1998.5: {
+      title: "Largest cluster",
+      description: "Bukit Pelandok becomes the epicenter with the highest number of cases."
+    },
+    1999: {
+      title: "Virus identified",
+      description: "March 1999: Novel paramyxovirus isolated from patient in Kampung Sungai Nipah."
+    },
+    1999.5: {
+      title: "Outbreak contained",
+      description: "May 1999: Last case reported. Over 1 million pigs culled. Economic losses: $350-400M."
+    }
+  };
+
+  const slider = document.getElementById('timeline-slider');
+  const contentDiv = document.getElementById('timeline-text');
+
+  slider.addEventListener('input', function() {
+    const value = parseFloat(this.value);
+    // Find closest data point
+    const keys = Object.keys(timelineData).map(Number);
+    let closest = keys[0];
+    for (const key of keys) {
+      if (Math.abs(key - value) < Math.abs(closest - value)) {
+        closest = key;
+      }
+    }
+    const data = timelineData[closest];
+    contentDiv.innerHTML = `
+      <strong>${data.title}</strong> — ${closest}<br>
+      <span class="desc">${data.description}</span>
+    `;
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+    <!-- Your content goes here -->
+</body>
+</html>

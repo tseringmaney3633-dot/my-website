@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nipah Virus - Password Protected</title>
+    <style>
+        /* Reset and body styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Password Page Styles */
+        .password-page {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .password-page h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .password-page .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .password-page .lock-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .password-page input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .password-page input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .password-page button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .password-page button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .password-page button:active {
+            transform: translateY(0);
+        }
+
+        .password-page .error-msg {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .password-page .error-msg.show {
+            display: block;
+        }
+
+        .password-page .hint {
+            color: #888;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .password-page {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== PASSWORD PAGE ====== -->
+    <div class="password-page" id="passwordPage">
+        <span class="lock-icon">🔒</span>
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Enter the password to access the Nipah Virus Information Portal</p>
+
+        <input type="password" id="passwordInput" placeholder="Enter password..." autofocus>
+        <button onclick="checkPassword()">Unlock Portal</button>
+
+        <p class="error-msg" id="errorMsg">❌ Incorrect password. Please try again.</p>
+       
+        <!-- Press Enter key to submit -->
+        <script>
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+        </script>
+    </div>
+
+    <!-- ====== JAVASCRIPT ====== -->
+    <script>
+        // Set your password here
+        const CORRECT_PASSWORD = "tsering@3633";
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const errorMsg = document.getElementById('errorMsg');
+            const password = input.value.trim();
+
+            if (password === CORRECT_PASSWORD) {
+                // ✅ Correct password - redirect to introduction.html
+                window.location.href = "introduction.html";
+            } else {
+                // ❌ Wrong password - show error
+                errorMsg.classList.add('show');
+                input.value = '';
+                input.focus();
+                input.style.borderColor = '#e74c3c';
+                setTimeout(() => {
+                    input.style.borderColor = '#ddd';
+                }, 1000);
+            }
+        }
+    </script>
+
+</body>
+</html>

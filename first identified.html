@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nipah virus · Malaysia 1998–1999</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #f4f7fb;
+      color: #1e2b3a;
+      line-height: 1.6;
+    }
+
+    /* ---- layout ---- */
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---- sidebar ---- */
+    .sidebar {
+      width: 260px;
+      background: #0f1a2b;
+      color: #e6edf5;
+      padding: 2rem 1.2rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-brand {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid #2a3a4e;
+      padding-bottom: 1.2rem;
+    }
+
+    .sidebar-brand h1 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-brand h1 i {
+      color: #6c8eb0;
+      font-size: 1.8rem;
+    }
+
+    .sidebar-brand p {
+      font-size: 0.85rem;
+      color: #8da3bb;
+      margin-top: 6px;
+      font-weight: 300;
+    }
+
+    .nav-links {
+      list-style: none;
+      flex: 1;
+    }
+
+    .nav-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      color: #c9d7e8;
+      text-decoration: none;
+      font-weight: 400;
+      transition: 0.2s;
+      background: transparent;
+      font-size: 0.98rem;
+    }
+
+    .nav-links a i {
+      width: 22px;
+      font-size: 1.1rem;
+      color: #6f8aa8;
+    }
+
+    .nav-links a:hover {
+      background: #1f3045;
+      color: white;
+    }
+
+    .nav-links a.active {
+      background: #2a3f58;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .nav-links a.active i {
+      color: #b6d0e8;
+    }
+
+    .file-links {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #243447;
+    }
+
+    .file-links p {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6f8aa8;
+      margin-bottom: 12px;
+    }
+
+    .file-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #b6cde0;
+      text-decoration: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .file-links a i {
+      font-size: 1rem;
+      color: #5f7d9c;
+    }
+
+    .file-links a:hover {
+      background: #1f3045;
+      color: white;
+    }
+
+    /* ---- main content ---- */
+    .main {
+      flex: 1;
+      padding: 2.5rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .page-header h2 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: #0f1a2b;
+      letter-spacing: -0.4px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-header h2 i {
+      color: #3f6b8c;
+      font-size: 2rem;
+    }
+
+    .page-header .sub {
+      color: #3f5a72;
+      font-size: 1rem;
+      margin-top: 6px;
+      font-weight: 300;
+      border-left: 4px solid #8bb3d0;
+      padding-left: 1rem;
+    }
+
+    /* cards / sections */
+    .section-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem 2.2rem;
+      margin-bottom: 2.2rem;
+      box-shadow: 0 6px 18px rgba(0, 20, 40, 0.04);
+      border: 1px solid #eaeef4;
+      transition: 0.15s;
+      scroll-margin-top: 20px; /* for smooth anchor offset */
+    }
+
+    .section-card:hover {
+      border-color: #cbdbe9;
+    }
+
+    .section-card h3 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #1a2d41;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-card h3 i {
+      color: #3f6b8c;
+      font-size: 1.6rem;
+      width: 32px;
+    }
+
+    .section-card p {
+      margin-bottom: 0.9rem;
+      color: #1f3346;
+    }
+
+    .section-card ul, .section-card ol {
+      padding-left: 1.8rem;
+      margin: 0.8rem 0 1rem 0;
+    }
+
+    .section-card li {
+      margin-bottom: 0.5rem;
+      color: #1f3346;
+    }
+
+    .stat-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin: 1.2rem 0 0.5rem 0;
+    }
+
+    .stat-item {
+      background: #f0f5fc;
+      border-radius: 40px;
+      padding: 0.5rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #15304a;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-item i {
+      color: #33658a;
+    }
+
+    .highlight {
+      background: #ecf3fa;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-weight: 500;
+      color: #14456b;
+    }
+
+    .badge {
+      background: #d3e2f0;
+      padding: 0.15rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #1f4463;
+    }
+
+    hr {
+      margin: 1.5rem 0 1rem 0;
+      border: 0;
+      border-top: 1px solid #dce5ef;
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      color: #4d6a84;
+      border-top: 1px solid #dce5ef;
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-note i {
+      margin-right: 6px;
+      color: #50748f;
+    }
+
+    /* video container */
+    .video-container {
+      margin: 1.5rem 0 0.5rem 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0f1a2b;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .video-container iframe, 
+    .video-container video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      border: 0;
+    }
+
+    /* responsive */
+    @media (max-width: 820px) {
+      .app {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1.5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.8rem 1.5rem;
+      }
+
+      .sidebar-brand {
+        margin-bottom: 0;
+        border-bottom: 0;
+        padding-bottom: 0;
+        flex: 1 1 100%;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        flex: 1 1 100%;
+      }
+
+      .nav-links li {
+        margin-bottom: 0;
+      }
+
+      .nav-links a {
+        padding: 0.4rem 0.9rem;
+        font-size: 0.9rem;
+        background: #1b2b3d;
+        border-radius: 40px;
+      }
+
+      .file-links {
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        width: 100%;
+      }
+
+      .file-links p {
+        display: none;
+      }
+
+      .main {
+        padding: 1.5rem;
+      }
+
+      .section-card {
+        padding: 1.2rem;
+      }
+
+      .page-header h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stat-grid {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .sidebar-brand h1 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h1><i class="fas fa-virus"></i> Nipah·MY</h1>
+      <p>1998–1999 · outbreak archive</p>
+    </div>
+
+    <ul class="nav-links">
+      <!-- each link points to the corresponding section id -->
+      <li><a href="#discovery" class="active"><i class="fas fa-biohazard"></i> Discovery & misdiagnosis</a></li>
+      <li><a href="#transmission"><i class="fas fa-piggy-bank"></i> Pig–bat interface</a></li>
+      <li><a href="#epidemiology"><i class="fas fa-chart-line"></i> Epidemiology</a></li>
+      <li><a href="#singapore"><i class="fas fa-globe-asia"></i> Singapore & containment</a></li>
+    </ul>
+
+    <!-- file links (homepage.html & content table) -->
+    <div class="file-links">
+      <p><i class="fas fa-folder-open"></i> resources</p>
+      <a href="introduction.html"><i class="fas fa-file-code"></i> homepage</a>
+      <a href="content table.html"><i class="fas fa-table"></i> content table</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="page-header">
+      <h2><i class="fas fa-microscope"></i> Discovery and Initial Misdiagnosis</h2>
+      <div class="sub">1998 – 1999 · Peninsular Malaysia</div>
+    </div>
+
+    <!-- ============ SECTION 1: DISCOVERY ============ -->
+    <section class="section-card" id="discovery">
+      <h3><i class="fas fa-notes-medical"></i> The first outbreak</h3>
+      <p><span class="highlight">September 1998 – April 1999</span> — the first recorded Nipah virus (NiV) outbreak in humans occurred in Peninsular Malaysia. The epicenter was later traced to a pig farm in <strong>Ipoh, Perak</strong>, where the first human case had already appeared in January 1997.</p>
+      <p>The disease presented as a cluster of severe, acute febrile encephalitis among pig farmers near Ipoh. Because <strong>Japanese encephalitis (JE)</strong> was endemic to the region, the outbreak was initially misdiagnosed as JE. Authorities launched mass JE vaccination and mosquito control, but the outbreak expanded south to Sikamat (Negeri Sembilan) in December 1998, culminating in the largest cluster in <strong>Bukit Pelandok</strong>.</p>
+      <ul>
+        <li><i class="fas fa-arrow-right" style="color:#3f6b8c; margin-right: 8px;"></i> Epidemiological clues ruled out JE: most patients were adult males with occupational pig contact (JE typically affects children), and vaccinated individuals still fell ill.</li>
+        <li><i class="fas fa-arrow-right" style="color:#3f6b8c; margin-right: 8px;"></i> Farmers reported pigs with severe respiratory illness and a loud, barking cough (“barking pig syndrome”).</li>
+        <li><i class="fas fa-arrow-right" style="color:#3f6b8c; margin-right: 8px;"></i> In <strong>March 1999</strong>, a novel paramyxovirus was isolated from CSF of a patient from <em>Kampung Sungai Nipah</em> (Nipah River Village) – giving the virus its name.</li>
+      </ul>
+      <div class="stat-grid">
+        <span class="stat-item"><i class="fas fa-calendar-alt"></i> First case: Jan 1997</span>
+        <span class="stat-item"><i class="fas fa-map-pin"></i> Ipoh, Perak</span>
+        <span class="stat-item"><i class="fas fa-dna"></i> NiV-M strain</span>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 2: TRANSMISSION ============ -->
+    <section class="section-card" id="transmission">
+      <h3><i class="fas fa-arrow-trend-up"></i> Bats → Pigs → Humans</h3>
+      <p><strong>Spillover:</strong> Pig farms in Perak were situated near commercial fruit orchards (mango, etc.) that attracted wild fruit bats (<em>Pteropus</em> species), the natural NiV reservoir. Bats fed on fruit and dropped partially eaten pieces contaminated with saliva, urine, or faeces into pig pens, introducing the virus to a naïve pig population.</p>
+      <p><strong>Amplification in pigs:</strong> Pigs acted as highly efficient amplifying hosts. The virus spread via respiratory secretions and direct contact. Infected pigs developed laboured breathing and a harsh, non-productive cough – “barking pig syndrome” or “one‑mile cough”. Morbidity in confined swine reached nearly 100%, but mortality was low (1–5%).</p>
+      <p><strong>Spillover to humans:</strong> Direct contact with infected pigs or raw secretions (saliva, urine, tissue) during farming, slaughtering or handling was the primary risk. In a case‑control study, <span class="highlight">92%</span> of infected patients had direct contact with pigs.</p>
+      <p><span class="badge"><i class="far fa-circle"></i> No sustained human‑to‑human transmission</span> — unlike later outbreaks in Bangladesh and India, interhuman spread was extremely rare in Malaysia.</p>
+    </section>
+
+    <!-- ============ SECTION 3: EPIDEMIOLOGY ============ -->
+    <section class="section-card" id="epidemiology">
+      <h3><i class="fas fa-users"></i> Epidemiology & clinical features</h3>
+      <ul>
+        <li><strong>Cases & deaths:</strong> 265 lab‑confirmed cases, 105 deaths (CFR 39.6%). Some reviews cite up to 283 symptomatic cases and 109 deaths.</li>
+        <li><strong>Demographic:</strong> Vast majority were adult males with occupational livestock exposure.</li>
+        <li><strong>Clinical presentation:</strong> Rapid progressive encephalitic syndrome: high fever, severe headache, dizziness, myalgia, then altered mental status, confusion, areflexia, seizures, segmental myoclonus, nystagmus, and coma.</li>
+        <li><strong>Lineage:</strong> NiV‑Malaysia (NiV‑M) strain. Notably, human patients lacked severe respiratory symptoms (atypical pneumonia or ARDS), contrasting with the NiV‑B strain in Bangladesh and India.</li>
+      </ul>
+      <div class="stat-grid">
+        <span class="stat-item"><i class="fas fa-skull"></i> CFR 39.6%</span>
+        <span class="stat-item"><i class="fas fa-mars"></i> adult males</span>
+        <span class="stat-item"><i class="fas fa-lungs"></i> no severe respiratory</span>
+      </div>
+    </section>
+
+    <!-- ============ SECTION 4: SINGAPORE & CONTAINMENT ============ -->
+    <section class="section-card" id="singapore">
+      <h3><i class="fas fa-ship"></i> Spread to Singapore & containment</h3>
+      <p>In <strong>March 1999</strong>, the outbreak reached Singapore, causing 11 cases and 1 death among abattoir workers handling live pigs imported from Malaysia.</p>
+      <ul>
+        <li><strong>Mass swine culling:</strong> Malaysian authorities culled over 1 million pigs in affected regions; carcasses buried deep and decontaminated with quicklime.</li>
+        <li><strong>Import bans & farm closures:</strong> Singapore banned live pig imports from Malaysia and shut local abattoirs. Malaysia banned inter‑state pig transport and launched national surveillance.</li>
+        <li><strong>Domestic animal culling:</strong> Infected dogs on farms were also culled to prevent further transmission.</li>
+        <li><strong>Economic impact:</strong> The culling devastated the livestock industry, with estimated losses of <span class="highlight">$350–400 million</span> for Malaysia.</li>
+        <li>The last confirmed human case of this outbreak was reported in <strong>May 1999</strong>. No new NiV outbreaks have been reported in Malaysia since.</li>
+      </ul>
+      <div class="stat-grid">
+        <span class="stat-item"><i class="fas fa-piggy-bank"></i> 1M+ pigs culled</span>
+        <span class="stat-item"><i class="fas fa-dollar-sign"></i> $350M–400M loss</span>
+        <span class="stat-item"><i class="fas fa-check-circle"></i> last case May 1999</span>
+      </div>
+    </section>
+
+    <!-- ============ VIDEO SECTION (placeholder) ============ -->
+    <section class="section-card" id="video-section" style="background: #f8faff;">
+      <h3><i class="fas fa-video"></i> Related video</h3>
+           <div class="video-container">
+        <!-- 
+          To upload your own video: replace the src with the path to your video file.
+          Example: <video controls><source src="your-video.mp4" type="video/mp4"></video>
+          Or embed a YouTube video: <iframe src="https://www.youtube.com/embed/..." allowfullscreen></iframe>
+        -->
+        <video controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='225'%3E%3Crect width='100%25' height='100%25' fill='%231a2d41'/%3E%3Ctext x='50%25' y='50%25' font-family='Segoe UI' font-size='20' fill='%23b6cde0' text-anchor='middle' dy='.3em'%3E🎥 Upload your video here%3C/text%3E%3C/svg%3E">
+          <source src="outbreak.mp4.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <!-- 
+          For YouTube, replace the video tag above with:
+          <iframe src="https://www.youtube.com/embed/0ZjIyQvKt8Q" allowfullscreen></iframe>
+        -->
+      </div>
+      <p style="font-size:0.9rem; color:#3f5a72; margin-top:0.5rem;">
+             </p>
+    </section>
+
+    <!-- footer / note -->
+    <div class="footer-note">
+      <span><i class="fas fa-book-open"></i> Source: Discovery and Initial Misdiagnosis (1998–1999) · Nipah virus archive</span>
+      <span><i class="fas fa-tag"></i> NiV-M · Malaysia</span>
+    </div>
+  </main>
+</div>
+
+<!-- smooth scroll behavior + active link highlight -->
+<script>
+  (function() {
+    const links = document.querySelectorAll('.nav-links a');
+    const sections = [
+      document.getElementById('discovery'),
+      document.getElementById('transmission'),
+      document.getElementById('epidemiology'),
+      document.getElementById('singapore')
+    ];
+
+    // click handler: smooth scroll + active class
+    links.forEach((link, index) => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        // update active class
+        links.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // optional: update active on scroll (intersection observer)
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            links.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, { threshold: 0.35 });
+
+      sections.forEach(sec => {
+        if (sec) observer.observe(sec);
+      });
+    }
+  })();
+</script>
+</body>
+</html>

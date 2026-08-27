@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nipah Virus — Clinical Case Progression</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eef1f0;
+    --paper-card:#f7f8f7;
+    --ink:#16262b;
+    --ink-soft:#3c5158;
+    --line:#c3cdc9;
+    --teal:#2f6b6a;
+    --teal-deep:#1c4746;
+    --amber:#a8672b;
+    --red:#9c3b34;
+    --red-soft:#f3e3e0;
+    --teal-soft:#e3ece9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 2.6rem;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:3.5rem 1.25rem 5rem;
+  }
+  .sheet{
+    max-width:1180px;
+    width:100%;
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(22,38,43,0.04), 0 20px 40px -28px rgba(22,38,43,0.35);
+  }
+
+  /* ---- report header ---- */
+  header{
+    padding:2.6rem 3rem 1.8rem;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    margin-bottom:0.9rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:0.5rem;height:0.5rem;
+    background:var(--red);
+    border-radius:50%;
+    box-shadow:0 0 0 3px var(--red-soft);
+  }
+  h1{
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    font-size:2.6rem;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+    color:var(--ink);
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--ink-soft);
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    margin-top:1.7rem;
+    border:1px solid var(--line);
+  }
+  .meta{
+    flex:1 1 180px;
+    padding:0.8rem 1.2rem;
+    border-right:1px solid var(--line);
+  }
+  .meta:last-child{border-right:none;}
+  .meta .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:0.3rem;
+  }
+  .meta .v{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--teal-deep);
+  }
+  .meta.warn .v{color:var(--red);}
+
+  /* ---- progression rail (signature element) ---- */
+  .rail-section{
+    padding:2.6rem 3rem 1rem;
+  }
+  .rail-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:1.6rem;
+  }
+  .rail{
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding-bottom:0.5rem;
+  }
+  .rail::before{
+    content:"";
+    position:absolute;
+    top:11px;
+    left:0; right:0;
+    height:2px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 11px);
+  }
+  .node{
+    position:relative;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding:0 0.4rem;
+  }
+  .node .dot{
+    width:24px;height:24px;
+    border-radius:50%;
+    background:var(--paper-card);
+    border:2px solid var(--teal);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.65rem;
+    font-weight:600;
+    color:var(--teal-deep);
+    z-index:1;
+    margin-bottom:0.7rem;
+    transition: background .18s ease, color .18s ease, transform .18s ease;
+  }
+  .node.severe .dot{border-color:var(--red); color:var(--red);}
+  .node .stage{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    max-width:110px;
+    line-height:1.35;
+  }
+
+  /* ---- entries ---- */
+  .entries{padding:1.4rem 3rem 3rem;}
+  .entry{
+    display:grid;
+    grid-template-columns: 68px 1fr 140px;
+    gap:1.6rem;
+    padding:1.6rem 0;
+    border-top:1px solid var(--line);
+    cursor:pointer;
+  }
+  .entry:last-child{border-bottom:1px solid var(--line);}
+  .entry .num{
+    font-family:'Source Serif 4', serif;
+    font-style:italic;
+    font-size:2rem;
+    color:var(--line);
+    line-height:1;
+  }
+  .entry .body h3{
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    font-size:1.28rem;
+    color:var(--ink);
+    margin-bottom:0.5rem;
+  }
+  .entry .body p{
+    font-size:0.95rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:56ch;
+  }
+  .entry .body ul{
+    margin-top:0.4rem;
+    list-style:none;
+  }
+  .entry .body ul li{
+    font-size:0.93rem;
+    line-height:1.55;
+    color:var(--ink-soft);
+    padding-left:1.1rem;
+    position:relative;
+  }
+  .entry .body ul li::before{
+    content:"–";
+    position:absolute;left:0;
+    color:var(--teal);
+  }
+  .entry .stat{
+    text-align:right;
+  }
+  .entry .stat .num-stat{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:1.5rem;
+    color:var(--teal-deep);
+    display:block;
+    line-height:1.1;
+  }
+  .entry.severe .stat .num-stat{color:var(--red);}
+  .entry .stat .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .detail{
+    grid-column: 2 / 3;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:max-height .32s ease, opacity .25s ease, padding .25s ease, margin .25s ease;
+    border-left:2px solid var(--teal);
+    padding-left:0;
+    color:var(--teal-deep);
+    font-size:0.88rem;
+    line-height:1.6;
+  }
+  .entry.open .detail{
+    max-height:240px;
+    opacity:1;
+    margin-top:0.9rem;
+    padding-left:0.9rem;
+  }
+  .toggle-hint{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+    opacity:0.55;
+    margin-top:0.6rem;
+    letter-spacing:0.04em;
+  }
+  .entry:hover .toggle-hint{opacity:0.9;}
+  .entry:hover{background:var(--teal-soft);}
+  .entry.severe:hover{background:var(--red-soft);}
+
+  /* ---- navigation buttons (added) ---- */
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 1.8rem 3rem 2.2rem;
+    border-top: 1px solid var(--line);
+    background: rgba(238, 241, 240, 0.3);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.7rem 1.8rem;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    border: 1px solid transparent;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary {
+    background: var(--teal-deep);
+    color: white;
+    border-color: var(--teal-deep);
+  }
+  .btn-primary:hover {
+    background: #143b3a;
+    box-shadow: 0 4px 10px rgba(28, 71, 70, 0.25);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink-soft);
+    border-color: var(--line);
+  }
+  .btn-secondary:hover {
+    background: var(--teal-soft);
+    border-color: var(--teal);
+    color: var(--teal-deep);
+    transform: translateY(-2px);
+  }
+  .btn i { font-style: normal; }  /* fallback for emoji */
+
+  footer{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.6rem;
+    padding:1.2rem 3rem 1.8rem;
+    border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+  }
+
+  @media (max-width: 760px){
+    header,.rail-section,.entries,footer, .button-container{padding-left:1.4rem;padding-right:1.4rem;}
+    h1{font-size:2rem;}
+    .rail{flex-wrap:wrap; row-gap:1.6rem;}
+    .rail::before{display:none;}
+    .node{flex:1 1 30%;}
+    .entry{grid-template-columns: 40px 1fr; }
+    .entry .stat{grid-column:2/3; text-align:left; display:flex; align-items:baseline; gap:0.5rem; margin-top:0.3rem;}
+    .detail{grid-column:1/-1;}
+    .button-container { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header>
+    <div class="eyebrow">Zoonotic Paramyxovirus &middot; Case Report Format</div>
+    <h1>Nipah virus <em>— clinical course</em></h1>
+    <div class="meta-row">
+      <div class="meta">
+        <span class="k">Incubation period</span>
+        <span class="v">3–14 days</span>
+      </div>
+      <div class="meta">
+        <span class="k">Extended range</span>
+        <span class="v">up to 21 days</span>
+      </div>
+      <div class="meta warn">
+        <span class="k">Case fatality — NiV-B</span>
+        <span class="v">~75%</span>
+      </div>
+      <div class="meta warn">
+        <span class="k">Case fatality — NiV-M</span>
+        <span class="v">40–50%</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="rail-section">
+    <div class="rail-label">Disease progression, onset → outcome</div>
+    <div class="rail">
+      <div class="node"><div class="dot">01</div><div class="stage">Subclinical infection</div></div>
+      <div class="node"><div class="dot">02</div><div class="stage">Prodromal phase</div></div>
+      <div class="node severe"><div class="dot">03</div><div class="stage">Encephalitic syndrome</div></div>
+      <div class="node severe"><div class="dot">04</div><div class="stage">Respiratory involvement</div></div>
+      <div class="node severe"><div class="dot">05</div><div class="stage">Outcome / fatality</div></div>
+      <div class="node"><div class="dot">06</div><div class="stage">Sequelae, relapse</div></div>
+    </div>
+  </div>
+
+  <div class="entries">
+
+    <div class="entry" onclick="this.classList.toggle('open')">
+      <div class="num">01</div>
+      <div class="body">
+        <h3>Subclinical / asymptomatic infection</h3>
+        <p>A minority of infections produce no overt symptoms at all.</p>
+        <div class="detail">Silent infection is often undetected in surveillance, though its role in onward transmission remains a subject of study.</div>
+        <div class="toggle-hint">tap row for detail</div>
+      </div>
+      <div class="stat">
+        <span class="num-stat">8–15%</span>
+        <span class="label">of cases</span>
+      </div>
+    </div>
+
+    <div class="entry" onclick="this.classList.toggle('open')">
+      <div class="num">02</div>
+      <div class="body">
+        <h3>Prodromal phase</h3>
+        <p>Non-specific, flu-like presentation: high-grade fever, severe headache, myalgia, sore throat, vomiting, dizziness.</p>
+        <div class="detail">Symptoms are easily mistaken for common viral illness in this window, which delays isolation and treatment before rapid progression to CNS involvement.</div>
+        <div class="toggle-hint">tap row for detail</div>
+      </div>
+      <div class="stat">
+        <span class="num-stat">3–14d</span>
+        <span class="label">onset window</span>
+      </div>
+    </div>
+
+    <div class="entry severe" onclick="this.classList.toggle('open')">
+      <div class="num">03</div>
+      <div class="body">
+        <h3>Encephalitic syndrome</h3>
+        <ul>
+          <li>Altered mental status, confusion, disorientation</li>
+          <li>Seizures, segmental myoclonus</li>
+          <li>Nystagmus, cerebellar ataxia, areflexia</li>
+          <li>Progression to coma</li>
+        </ul>
+        <div class="detail">Death usually occurs within 6 days of symptom onset, most often driven by brainstem involvement.</div>
+        <div class="toggle-hint">tap row for detail</div>
+      </div>
+      <div class="stat">
+        <span class="num-stat">≤6d</span>
+        <span class="label">to death, typical</span>
+      </div>
+    </div>
+
+    <div class="entry severe" onclick="this.classList.toggle('open')">
+      <div class="num">04</div>
+      <div class="body">
+        <h3>Respiratory involvement — NiV-B lineage</h3>
+        <p>Severe cough and atypical pneumonia, with rapid progression to acute respiratory distress syndrome (ARDS).</p>
+        <div class="detail">Prominent in the Bangladesh lineage but historically absent in Malaysian cohorts — a key clinical distinction between strains.</div>
+        <div class="toggle-hint">tap row for detail</div>
+      </div>
+      <div class="stat">
+        <span class="num-stat">70–83%</span>
+        <span class="label">of NiV-B cases</span>
+      </div>
+    </div>
+
+    <div class="entry severe" onclick="this.classList.toggle('open')">
+      <div class="num">05</div>
+      <div class="body">
+        <h3>Case fatality rate</h3>
+        <p>Outcome depends heavily on strain and on access to supportive care.</p>
+        <div class="detail">NiV-B carries the higher overall fatality rate (~75%) versus NiV-M (40–50%). Timely, well-resourced supportive care measurably improves survival odds.</div>
+        <div class="toggle-hint">tap row for detail</div>
+      </div>
+      <div class="stat">
+        <span class="num-stat">40–100%</span>
+        <span class="label">CFR range</span>
+      </div>
+    </div>
+
+    <div class="entry" onclick="this.classList.toggle('open')">
+      <div class="num">06</div>
+      <div class="body">
+        <h3>Sequelae &amp; relapsed / late-onset encephalitis</h3>
+        <p>Survivors face lasting neurological risk: chronic fatigue, focal nerve palsies, myoclonus, depression. Pediatric survivors may show nightmares, violent outbursts, and other psychiatric effects.</p>
+        <div class="detail">Late-onset encephalitis can surface months or even years later — in one documented case, 11 years post-infection — attributed to viral persistence in brain tissue.</div>
+        <div class="toggle-hint">tap row for detail</div>
+      </div>
+      <div class="stat">
+        <span class="num-stat">20–22%</span>
+        <span class="label">of survivors</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ---- navigation buttons (added) ---- -->
+  <div class="button-container">
+    <a href="introduction.html" class="btn btn-secondary">
+      🏠 Back to Introduction
+    </a>
+    <a href="content table.html" class="btn btn-primary">
+      📖 Go to Table
+    </a>
+  </div>
+
+  <footer>
+    <span>Compiled from clinical literature &middot; NiV-B (Bangladesh) &amp; NiV-M (Malaysia) lineages</span>
+    <span>For clinical / educational reference only</span>
+  </footer>
+
+</div>
+</body>
+</html>
