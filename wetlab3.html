@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repurposing Clinical Candidates for Nipah and Hendra Viruses</title>
+    <style>
+        /* --- Global Reset & Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f4f7f9;
+            padding: 40px 20px;
+        }
+
+        /* --- Main Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-top: 8px solid #0d6e6e; /* Scientific teal accent */
+        }
+
+        /* --- Horizontal Navigation Menu (Bottom) --- */
+        .bottom-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+            flex-wrap: wrap; /* Ensures it wraps on smaller screens */
+        }
+
+        .bottom-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .bottom-nav a {
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1e3a5f;
+            background: #ffffff;
+            padding: 12px 28px;
+            border-radius: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e9edf4;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .bottom-nav a:hover {
+            background: #1e3a5f;
+            color: white;
+            box-shadow: 0 8px 24px rgba(30,58,95,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* --- Headings --- */
+        h1 {
+            color: #0d6e6e;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        /* Style for the clickable title link */
+        .title-link {
+            text-decoration: none;
+            color: #0d6e6e;
+            transition: color 0.3s ease;
+        }
+
+        .title-link:hover {
+            color: #0a4d4d;
+            text-decoration: underline;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.6rem;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid #0d6e6e;
+            background-color: #f9fbfb;
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        h3 {
+            color: #0d6e6e;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        /* --- Lists --- */
+        ol {
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        ol > li {
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            margin-top: 10px;
+            margin-left: 20px;
+            list-style-type: none;
+        }
+
+        ul li {
+            margin-bottom: 12px;
+            font-weight: 400;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        ul li::before {
+            content: "•";
+            color: #0d6e6e;
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+
+        /* Nested Lists */
+        ul ul {
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        ul ul li::before {
+            content: "◦";
+            color: #7f8c8d;
+        }
+
+        /* --- Tables --- */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 30px 0;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #0d6e6e;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f7f7;
+        }
+
+        /* --- Images --- */
+        figure {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 6px;
+        }
+
+        figcaption {
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* --- Specific Utilities --- */
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .insight-box {
+            background-color: #eaf6f6;
+            border-left: 4px solid #0d6e6e;
+            padding: 20px;
+            margin: 40px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .insight-box h1 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .insight-box p {
+            margin-bottom: 0;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Added link wrapping the title -->
+        <h1><a href="https://pubs.acs.org/doi/abs/10.1021/acsinfecdis.6c00206" target="_blank" class="title-link">Repurposing Clinical Candidates for Nipah and Hendra Viruses</a></h1>
+
+        <p><strong>Study Overview and Objectives:</strong> Nipah virus (NiV) and Hendra virus (HeV) are highly lethal, bat-borne zoonotic paramyxoviruses that cause severe respiratory and neurological disease in humans, with no approved small-molecule treatments currently available. While host-cell entry is known to depend on host proteases, the translational feasibility of targeting this pathway with clinically relevant small molecules has remained poorly defined. This 2026 study by Thomas R. Lane et al. systematically evaluates clinical-stage, repurposed small molecules to target host-cell entry using an integrated computational, in vitro, and in vivo framework.</p>
+
+        <h1>These are the works flow</h1>
+
+        <h2>To evaluate and repurpose clinical-stage small molecules against Nipah virus (NiV) and Hendra virus (HeV), the authors established a comprehensive workflow spanning computational machine learning, in vitro phenotypic assays, and in vivo pharmacokinetic and efficacy studies.</h2>
+
+        <ol>
+            <!-- Section 1 -->
+            <li><strong>Computational Modeling and Virtual Screening</strong>
+                <ul>
+                    <li><strong>Data Curation:</strong> The authors retrieved IC50 and \(K_i\) data for cathepsin L (ChEMBL ID 3837) from the ChEMBL 35 database. Using their in-house, automated <strong>e-Clean pipeline,</strong> they curated molecular structures by normalising isotopes, removing stereochemistry, disconnecting metals, stripping salts and solvents, neutralizing charges, and canonicalising SMILES strings.</li>
+                    <li><strong>Model Generation:</strong> They generated several regression machine learning models in their proprietary <strong>Assay Central</strong> software. The models used 2048-bit ECFP6 fingerprints and were trained using seven algorithms: adaptive boosting regression (adar), Bayesian ridge regression (br), elastic net regression (enr), k-nearest neighbors' regression (knnr), random forest regression (rfr), support vector machine regression (svr), and XGBoost regression (xgbr).</li>
+                    <li><strong>Validation:</strong> Models were validated using nested 5-fold <strong>cross-validation.</strong> In each cycle, 20% of the data was held out, and hyperparameters were optimised via a 5-fold grid search on the remaining 80%.</li>
+                    <li><strong>Virtual Screening:</strong> Using the best-performing models, they screened the MedChemExpress FDA-Approved & Pharmacopeial Drug Library (HY-L066) to prioritize potent cathepsin L inhibitor candidates.</li>
+                </ul>
+            </li>
+
+            <!-- Section 2 -->
+            <li><strong>In Vitro Phenotypic Antiviral Assays</strong>
+                <ul>
+                    <li><strong>Virus and Cell Propagation:</strong> The wild-type Hendra virus (genotype 1), wild-type NiV (Malaysia and Bangladesh strains), and recombinant reporter strains (rNiVM-Gluc-eGFP and rNiVB-Gluc-eGFP, which express Gaussia luciferase and enhanced GFP) were propagated in Vero E6 cells.</li>
+                    <li><strong>Plaque Reduction (PR) Assay:</strong> Vero CCL81 cells were pretreated with individual compounds for up to 4 hours. Cells were then infected with wild-type virus to yield at least 50 plaques per well. Compounds were maintained in a 1.0% methylcellulose and 2× MEM overlay mixture containing 2% FBS and 2% penicillin-streptomycin. Plates were incubated at 37°C under 5% CO2 for 2 days, fixed in 10% buffered formalin, and stained with 0.25% crystal violet to calculate plaque reduction.</li>
+                    <li><strong>Cellular Cytotoxicity Assay:</strong> Vero CCL81 cells were tested in the absence of virus using a neutral red-based toxicology assay kit to calculate the 50% cell cytotoxic dose (CC50).</li>
+                    <li><strong>Gaussia Luciferase Assays:</strong> Vero CCL81 cells were seeded in 96-well plates at 10,000 cells/well. Cells were pretreated for 4 hours and infected with rNiVM-Gluc-eGFP or rNiVB-Gluc-eGFP at a multiplicity of infection (MOI) of 0.0005. After 48 hours of infection, luminescence was measured on a Cytation platform using the Pierce Gaussia Luciferase Glow Assay kit.</li>
+                </ul>
+            </li>
+
+            <!-- Section 3 -->
+            <li><strong>Calpain-1 Enzymatic Assay</strong>
+                <ul>
+                    <li><strong>Assay Method:</strong> Human erythrocyte-derived calpain-1 was preincubated with five-point, 10-fold serial dilutions of test compounds (or vehicle control) in a modified 50 mM Tris-HCl buffer (pH 7.2) for 15 minutes at 37°C.</li>
+                    <li><strong>Detection:</strong> Enzymatic cleavage was initiated by adding 25 µM Suc-LLVY-AMC (a fluorogenic substrate). Following a 15-minute incubation, the release of 7-amino-4-methylcoumarin (AMC) was measured spectrofluorometrically (excitation: 360 nm, emission: 465 nm).</li>
+                </ul>
+            </li>
+
+            <!-- Section 4 -->
+            <li><strong>In Vivo Hamster Tolerability and Pharmacokinetics (PK)</strong>
+                <ul>
+                    <li><strong>Animal Welfare and Ethics:</strong> Work with live, infectious NiV and HeV was conducted in biosafety level 4 (BSL4) containment facilities at the University of Texas Medical Branch (UTMB). Animal studies complied with guidelines approved by the Institutional Animal Care and Use Committee (IACUC).</li>
+                    <li><strong>Formulations:</strong> Pyronaridine was formulated in <span class="highlight">5% Kolliphor HS 15 (Solutol) in 95% PBS.</span> Relacatib was formulated in <span class="highlight">2% DMSO and 98% hydroxypropyl-β-cyclodextrin (HPβCD) (20%);</span> 1% Tween 80 was added to higher concentrations (15 and 20 mg/mL) to manage suspension heterogeneity.</li>
+                    <li><strong>Maximum Tolerated Dose (MTD):</strong> Formulations were administered via oral gavage (PO) to male Syrian hamsters (three animals per group). They used a dose-escalation protocol starting with the lowest dose. Hamsters were observed closely during the first 15 minutes and 1 hour post-dose, and clinical symptoms and body weight were monitored twice daily for up to 72 hours.</li>
+                    <li><strong>PK Dosing and Sampling:</strong>
+                        <ul>
+                            <li>Hamsters received single oral doses: pyronaridine at 600 mg/kg (mixed male/female) or relacatib at 75 and 150 mg/kg (males only).</li>
+                            <li>Blood was collected from a carotid artery catheter into K2EDTA-coated tubes at specified intervals, chilled on ice, and centrifuged at 2,500g for 15 minutes at 4°C to harvest plasma.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Bioanalytical Mass Spectrometry (LC-MS/MS):</strong> Plasma samples were processed using protein precipitation with acetonitrile (ACN) and analyzed on a <strong>Triple Quad 5500+ mass spectrometer</strong> using electrospray ionization in positive ion mode and multiple reaction monitoring (MRM). Analytes were separated on a Synergi Fusion-RP column. Concentration curves were evaluated via weighted linear regression. Non-compartmental analysis (NCA) of the plasma concentration data was performed using WinNonlin.</li>
+                </ul>
+            </li>
+
+            <!-- Section 5 -->
+            <li><strong>In Vivo Nipah Virus Efficacy Studies</strong>
+                <ul>
+                    <li><strong>Challenge Protocol:</strong> Five- to six-week-old Syrian golden hamsters (equal sex per group) were anesthetized using isoflurane and challenged via intraperitoneal (IP) injection with rNiVM-Gluc-eGFP. Doses were back-titrated and determined as 3 times 10^5 PFU (Study 1), 1.06 times 10^4 PFU (Study 2), or 1.78 times 10^4 PFU (Study 3).</li>
+                    <li><strong>Treatment Dosing Cohorts:</strong>
+                        <ul>
+                            <li><strong>Study 1 (Pyronaridine):</strong> A single oral dose of pyronaridine (150, 300, or 600 mg/kg) administered immediately post-infection.</li>
+                            <li><strong>Study 2 (Relacatib Single Dose):</strong> A single oral dose of relacatib (75 or 150 mg/kg) administered immediately post-infection.</li>
+                            <li><strong>Study 3 (Relacatib Multi-Dose):</strong> Relacatib administered at 75 mg/kg BID (twice-daily oral gavage) for 14 consecutive days.</li>
+                            <li><strong>Controls:</strong> Negative control animals received vehicle solution matching the treatment group frequency. Positive control animals received <strong>favipiravir (300 mg/kg/day BID PO) for 14 consecutive days.</strong></li>
+                        </ul>
+                    </li>
+                    <li><strong>Clinical Monitoring:</strong> Hamsters were assessed daily for 21 days. Health was scored on a 1–4 scale. Hamsters displaying severe morbidity (e.g., respiratory distress, paralysis, or weight loss less than or equal to 20%; score of 4) were immediately euthanized.</li>
+                    <li><strong>Viremia / Viral Load Quantification:</strong> Blood was collected via retro-orbital bleeds on days 3 and 5 post-infection, and during terminal sampling. In Study 3, serum was batch-processed to measure viremia by mixing 20 µL of hamster serum with 50 µL of Gaussia luciferase substrate, acquiring the luminescence signal on a Cytation platform.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>These are the best candidate molecules</h2>
+        <figure>
+            <img src="candidate.jpg" alt="these are the best candidates">
+        </figure>
+
+        <h2>In vitro inhibition of NiV (A; Malaysia strain, B; Bangladesh strain) using a plaque reduction assay (PR) for a cathepsin L inhibitor, relacatib, MDL-28170, and MG-101, and a favipiravir (T-705) control.</h2>
+        <figure>
+            <img src="result1.jpg" alt="results">
+        </figure>
+
+        <h2>MTD and PK study results for pyronaridine (PYR) and relacatib in Syrian hamster. (A, B) survival and mean body weight change following an oral dose of pyronaridine at 400, 450, 500, 550, or 600 mg/kg. (C) Plasma levels of pyronaridine following a single oral dose at 600 mg/kg. (D, E) survival and mean body weight change following an oral dose of relacatib at 50, 100, 150, or 200 mg/kg. (F) Plasma levels of relacatib following a single oral dose at 75 or 150 mg/kg. LLOQ = lower limit of quantification.</h2>
+        <figure>
+            <img src="result2.jpg" alt="results">
+        </figure>
+
+        <h2>Table 2. Pharmacokinetic Parameters ± SD for Pyronaridine and Relacatib in Syrian Hamster</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>compound</th>
+                    <th>dose (mg/kg)</th>
+                    <th>t<sub>1/2</sub> (hr)</th>
+                    <th>t<sub>max</sub> (hr)</th>
+                    <th>C<sub>max</sub> (ng/mL)</th>
+                    <th>AUC<sub>last</sub> (h*ng/mL)</th>
+                    <th>AUC<sub>inf</sub> (h*ng/mL)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>pyronaridine</td>
+                    <td>600</td>
+                    <td>118.4 ± 35.1</td>
+                    <td>1 ± 0</td>
+                    <td>1421 ± 383</td>
+                    <td>28,478 ± 3889</td>
+                    <td>34,619 ± 5194</td>
+                </tr>
+                <tr>
+                    <td>relacatib</td>
+                    <td>75</td>
+                    <td>1.12 ± 0.03</td>
+                    <td>0.5 ± 0</td>
+                    <td>6745 ± 774</td>
+                    <td>10,198 ± 906</td>
+                    <td>10,272 ± 925</td>
+                </tr>
+                <tr>
+                    <td>relacatib</td>
+                    <td>150</td>
+                    <td>0.88 ± 1.63</td>
+                    <td>0.5 ± 0</td>
+                    <td>9159 ± 5711</td>
+                    <td>16,404 ± 9683</td>
+                    <td>16,432 ± 9708</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>NiV efficacy study results. (A) Survival rates plots (Kaplan–Meier) of Syrian hamsters following challenge with rNiVM-Gluc-eGFP when treated with pyronaridine (PYR), relacatib, vehicle, or favipiravir control in three independent studies. Pooled vehicle and favipiravir control data from three independent studies are shown in the main panels for clarity and summary visualization. Control data from each individual study are presented separately in Supporting Figure S7. Statistical significance was determined using a Mantel–Cox test versus the vehicle control; significant differences were only seen in the favipiravir group(s). (B) Viremia levels were determined by luciferase activity in Study 3 only (relacatib and favipiravir BID). No statistically significant viral load was found between the vehicle control and either group in SD3, SD5, or in the terminal bleeds. SD = single dose, BID = twice daily dose, SDX = study day (favipiravir 300 mg/kg, BID study, n = 6; n = 8 for all other studies).</h2>
+        
+        <figure>
+            <img src="result5.jpg" alt="results">
+        </figure>
+
+        <div class="insight-box">
+            <h1>Conclusion</h1>
+            <p>This study systematically evaluates host-directed entry inhibition against the lethal, bat-borne Nipah and Hendra viruses by screening clinical-stage, repurposed small molecules targeting host cathepsin L. Through computational machine learning and in vitro assays, the authors identified several highly potent cathepsin L inhibitors—most notably relacatib, which exhibited nanomolar-to-sub-micromolar antiviral activity against multiple viral strains and was substantially more potent than the clinical control favipiravir in vitro. However, despite this exceptional cell-based efficacy and demonstrated tolerability in Syrian hamsters, neither relacatib nor the antimalarial pyronaridine provided protection in vivo against a lethal, recombinant Nipah virus challenge under the tested dosing regimens. This translational disconnect was primarily attributed to pharmacokinetic limitations rather than definitive biological inefficacy, as relacatib's rapid clearance (with a half-life of approximately one hour) and high rodent plasma protein binding (96.8% bound) severely restricted its unbound systemic exposure in the bloodstream. Consequently, the authors conclude that host-protease inhibition remains a valid therapeutic target, but future clinical translation will require optimized drug formulations, continuous delivery systems (such as intravenous or subcutaneous infusions), or combination therapies to achieve sustained target engagement.</p>
+        </div>
+
+        <!-- === INTEGRATED HORIZONTAL LINKS AT BOTTOM === -->
+        <div class="bottom-nav">
+            <ul>
+                <li>
+                    <a href="content table.html">🎥 Content Table of Nipah</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="fda_approved_drugs.html">🗺️ FDA Approved Drugs Home Page</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <a href="introduction.html">🏠 Introduction of Nipah</a>
+                </li>
+            </ul>
+        </div>
+        <!-- === END OF INTEGRATED LINKS === -->
+
+    </div>
+
+</body>
+</html>
