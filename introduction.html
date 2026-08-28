@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nipah Virus - Comprehensive Information</title>
+
+    <!-- Font Awesome (used only for the outbreak map icons/popups) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Leaflet CSS & JS (for the interactive outbreak map) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root{
+            --paper:#f0f2f5;
+            --paper-card:#ffffff;
+            --ink:#1a2a33;
+            --ink-soft:#3d5a6b;
+            --ink-faint:#8a9ba8;
+            --line:#d5cbc2;
+            --line-soft:#e5ddd5;
+            --teal:#2a7a7a;
+            --teal-deep:#1a5555;
+            --teal-soft:#e1efed;
+            --amber:#c47a3a;
+            --amber-soft:#f5ede4;
+            --red:#b54a42;
+            --red-soft:#f5e6e4;
+            --gold:#d4a056;
+            --gold-soft:#f5efe6;
+            --dark-bg:#1a2a33;
+            --dark-bg-soft:#2a404f;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: linear-gradient(145deg, #e8ecf0 0%, #d5dce3 100%);
+            min-height: 100vh;
+            color: var(--ink);
+            padding: 30px 20px;
+            line-height: 1.6;
+        }
+
+        /* ===== NAVIGATION ===== */
+        header {
+            max-width: 1180px;
+            margin: 0 auto 2.2rem auto;
+            padding: 1.1rem 2rem;
+            background: var(--paper-card);
+            border: 1px solid var(--line);
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 8px rgba(26,42,51,0.04);
+        }
+
+        .logo {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--teal-deep);
+            letter-spacing: -0.01em;
+        }
+        .logo span {
+            color: var(--amber);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--teal-deep);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.7rem 1.4rem;
+            border: 1px solid var(--teal-deep);
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-size: 0.82rem;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            display: inline-block;
+            background: transparent;
+        }
+
+        .nav-links li a:hover {
+            background: var(--teal-deep);
+            color: var(--paper-card);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(26,85,85,0.2);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            background: var(--paper-card);
+            border: 1px solid var(--line);
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 24px rgba(26,42,51,0.06), 0 30px 60px -30px rgba(26,42,51,0.3);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* ===== KICKER STRIP (was moving heading) ===== */
+        .kicker-strip {
+            padding: 0.9rem 2.6rem;
+            border-bottom: 1px solid var(--line);
+            background: linear-gradient(135deg, var(--teal-deep), var(--dark-bg-soft));
+        }
+
+        .kicker-strip p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            color: var(--paper-card);
+            text-align: center;
+            opacity: 0.95;
+        }
+        .kicker-strip p i {
+            color: var(--gold);
+        }
+
+        /* ===== HEADER BLOCK ===== */
+        .hero-block {
+            padding: 2.8rem 2.8rem 2rem;
+            border-bottom: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(240,242,245,0.3) 0%, transparent 100%);
+        }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--teal-deep);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--gold-soft);
+        }
+
+        .main-title {
+            font-family: 'Source Serif 4', serif;
+            font-weight: 600;
+            font-size: 2.6rem;
+            letter-spacing: -0.01em;
+            line-height: 1.08;
+            color: var(--ink);
+            margin-bottom: 0.6rem;
+        }
+        .main-title i {
+            color: var(--teal);
+        }
+
+        .sub-title {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        /* ===== DESCRIPTION TEXT ===== */
+        .description {
+            background: var(--paper);
+            padding: 1.7rem 1.9rem;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--teal);
+            border-radius: 0 8px 8px 0;
+            font-size: 1.02rem;
+            color: var(--ink-soft);
+            margin-top: 1.8rem;
+            line-height: 1.75;
+        }
+
+        .description i {
+            color: var(--teal-deep);
+            font-style: italic;
+        }
+
+        .highlight-text {
+            color: var(--teal-deep);
+            font-weight: 600;
+        }
+
+        /* ===== SECTIONS ===== */
+        section.block {
+            padding: 2.4rem 2.8rem;
+            border-bottom: 1px solid var(--line-soft);
+        }
+        section.block:last-of-type {
+            border-bottom: none;
+        }
+
+        /* ===== MEDIA GRID ===== */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.4rem;
+        }
+
+        .media-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .media-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--teal);
+            box-shadow: 0 14px 28px -18px rgba(26,42,51,0.3);
+        }
+
+        .media-card img,
+        .media-card video {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+
+        .media-card video {
+            background: #000;
+        }
+
+        .media-label {
+            text-align: center;
+            padding: 0.8rem 0 0.2rem 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .media-label span {
+            color: var(--teal-deep);
+            font-weight: 600;
+        }
+
+        /* ===== STATS / INFO BADGES (Clickable) ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 0.4rem;
+        }
+
+        .stat-item {
+            display: block;
+            background: var(--paper);
+            padding: 1.3rem 1rem;
+            text-align: center;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .stat-item:hover {
+            background: var(--teal-soft);
+            border-color: var(--teal);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42,122,122,0.08);
+        }
+
+        .stat-number {
+            font-family: 'Source Serif 4', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--teal-deep);
+        }
+
+        .stat-label {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--ink-soft);
+            font-size: 0.72rem;
+            letter-spacing: 0.04em;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        /* ===== SECTION HEADER (used to introduce the map section) ===== */
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .section-heading h2 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .section-heading .pill {
+            font-family: 'IBM Plex Mono', monospace;
+            background: var(--teal-soft);
+            border: 1px solid var(--teal);
+            color: var(--teal-deep);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .section-intro {
+            color: var(--ink-soft);
+            font-size: 0.96rem;
+            margin-bottom: 1.4rem;
+            max-width: 74ch;
+            line-height: 1.6;
+        }
+
+        /* ===== OUTBREAK MAP (merged) ===== */
+        .map-wrapper {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 1.1rem;
+            overflow: hidden;
+        }
+
+        #outbreak-map {
+            height: 480px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+
+        .map-stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem 1.8rem;
+            margin-top: 1rem;
+            padding: 0.9rem 1.4rem;
+            background: var(--paper-card);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            justify-content: center;
+        }
+
+        .map-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.86rem;
+            color: var(--ink-soft);
+        }
+
+        .map-stat i {
+            color: var(--teal-deep);
+            font-size: 0.95rem;
+        }
+
+        .map-stat .num {
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .legend-dot {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        .legend-dot.red { background: var(--red); }
+        .legend-dot.orange { background: var(--amber); }
+        .legend-dot.gold { background: var(--teal); }
+
+        /* ===== MAP NOTES ===== */
+        .map-notes {
+            background: var(--paper);
+            padding: 1.5rem 1.7rem;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--teal);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+            margin-top: 1.4rem;
+        }
+
+        .map-notes h3 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.02rem;
+            color: var(--ink);
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .map-notes h3 i {
+            color: var(--gold);
+        }
+
+        .map-notes ul {
+            list-style: none;
+            margin-top: 0.4rem;
+        }
+
+        .map-notes ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 0.55rem;
+            color: var(--ink-soft);
+            font-size: 0.88rem;
+            line-height: 1.55;
+        }
+
+        .map-notes ul li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+        }
+
+        .map-notes ul li strong {
+            color: var(--ink);
+        }
+
+        /* Leaflet custom popup, restyled to match this page's palette */
+        .custom-popup .leaflet-popup-content-wrapper {
+            background: var(--paper-card);
+            color: var(--ink);
+            border-radius: 8px;
+            border: 1px solid var(--line);
+            box-shadow: 0 12px 30px -10px rgba(26,42,51,0.3);
+        }
+
+        .custom-popup .leaflet-popup-tip {
+            background: var(--paper-card);
+        }
+
+        .custom-popup .leaflet-popup-content {
+            font-size: 0.86rem;
+            line-height: 1.55;
+            padding: 4px 2px;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .popup-title {
+            font-family: 'Source Serif 4', serif;
+            color: var(--teal-deep);
+            font-weight: 600;
+            font-size: 1rem;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+        }
+
+        .popup-stat {
+            display: flex;
+            gap: 14px;
+            margin-top: 4px;
+        }
+
+        .popup-stat span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+        }
+
+        .popup-stat .cases { color: var(--ink-soft); }
+        .popup-stat .deaths { color: var(--red); }
+        .popup-stat .cfr { color: var(--amber); }
+
+        /* ===== CTA / FOOTER ===== */
+        .cta-wrap {
+            padding: 2.4rem 2.8rem 2.8rem;
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(180deg, transparent, var(--paper));
+        }
+
+        .btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 0.9rem 2.4rem;
+            border: none;
+            border-radius: 60px;
+            color: var(--paper-card);
+            background: linear-gradient(135deg, var(--teal-deep), var(--dark-bg-soft));
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(26,85,85,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(26,85,85,0.3);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            header {
+                padding: 1rem;
+                border-radius: 8px;
+            }
+
+            .hero-block, section.block, .cta-wrap {
+                padding-left: 1.4rem;
+                padding-right: 1.4rem;
+            }
+
+            .kicker-strip {
+                padding: 0.8rem 1.4rem;
+            }
+
+            .main-title {
+                font-size: 1.8rem;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .media-card img,
+            .media-card video {
+                height: 200px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.7rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .section-heading h2 {
+                font-size: 1.3rem;
+            }
+
+            #outbreak-map {
+                height: 360px;
+            }
+
+            .map-notes {
+                padding: 1.1rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5rem;
+            }
+
+            .media-card img,
+            .media-card video {
+                height: 160px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+            }
+
+            .stat-item {
+                padding: 0.9rem 0.6rem;
+            }
+
+            .stat-number {
+                font-size: 1.3rem;
+            }
+
+            #outbreak-map {
+                height: 300px;
+            }
+
+            .section-heading {
+                flex-wrap: wrap;
+            }
+
+            .container {
+                border-radius: 8px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header>
+        <div class="logo">🦇 <span>Nipah</span> Virus</div>
+        <ul class="nav-links">
+            <li><a href="overview2.html">📖 Detailed Information</a></li>
+        </ul>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+
+        <!-- Kicker strip (was moving heading) -->
+        <div class="kicker-strip">
+            <p><i class="fas fa-exclamation-triangle"></i> Nipah Virus — Understanding the Threat <i class="fas fa-exclamation-triangle"></i></p>
+        </div>
+
+        <div class="hero-block">
+            <div class="eyebrow">Zoonotic Pathogen &middot; Reference Series</div>
+            <!-- Static Title -->
+            <h2 class="main-title">Introduction to <i>Nipah Virus</i></h2>
+            <p class="sub-title">✦ Zoonotic Pathogen | Henipavirus | Paramyxoviridae ✦</p>
+
+            <!-- Description -->
+            <div class="description">
+                <strong style="color: var(--teal-deep);">Nipah virus (NiV)</strong> is a highly pathogenic, zoonotic virus belonging
+                to the genus <i>Henipavirus</i> of the family
+                <i>Paramyxoviridae</i>. It can cause severe disease in humans,
+                including <strong style="color: var(--red);">Nipah virus encephalitis</strong> and respiratory illness, with
+                a high case-fatality rate.
+                <br><br>
+                🦇 Fruit bats of the genus <i>Pteropus</i> are considered the
+                <span class="highlight-text">natural reservoir</span> of the virus.
+                Transmission to humans can occur through contact with infected animals,
+                contaminated food, or infected individuals.
+            </div>
+        </div>
+
+        <!-- Media Grid -->
+        <section class="block">
+            <div class="media-grid">
+                <div class="media-card">
+                    <img src="nipah.png" alt="Nipah Virus Structure">
+                    <div class="media-label">🔬 <span>Virus Structure</span></div>
+                </div>
+
+                <div class="media-card">
+                    <img src="nipah.gif" alt="Nipah Virus Animation">
+                    <div class="media-label">🎯 <span>Virus Visualization</span></div>
+                </div>
+
+                <div class="media-card">
+                    <video controls>
+                        <source src="nipah.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="media-label">🎥 <span>Transmission Overview</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats (Clickable) -->
+        <section class="block">
+            <div class="stats">
+                <a href="case fatality rate.html" class="stat-item">
+                    <div class="stat-number">75%</div>
+                    <div class="stat-label">Case Fatality Rate</div>
+                </a>
+                <a href="mammalian orders.html" class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Mammalian Orders Affected</div>
+                </a>
+                <a href="first identified.html" class="stat-item">
+                    <div class="stat-number">1998</div>
+                    <div class="stat-label">First Identified (Malaysia)</div>
+                </a>
+                <a href="natural reservoir.html" class="stat-item">
+                    <div class="stat-number">🦇</div>
+                    <div class="stat-label">Natural Reservoir: <i>Pteropus</i></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== GLOBAL OUTBREAK MAP (merged) ===== -->
+        <section class="block">
+            <div class="section-heading">
+                <h2>🗺️ Global Outbreak Map</h2>
+                <span class="pill">1998 – 2023 · 20 documented outbreaks</span>
+            </div>
+            <p class="section-intro">
+                Every recorded Nipah outbreak, plotted geographically alongside the natural range of its
+                <i>Pteropus</i> bat reservoirs. Tap any marker or dashed circle for case counts, deaths, and case-fatality rate.
+            </p>
+
+            <div class="map-wrapper">
+                <div id="outbreak-map"></div>
+
+                <!-- Map stats bar -->
+                <div class="map-stats-bar">
+                    <span class="map-stat">
+                        <i class="fas fa-globe"></i> <span class="num" id="total-cases">0</span> cases
+                    </span>
+                    <span class="map-stat">
+                        <i class="fas fa-skull"></i> <span class="num" id="total-deaths">0</span> deaths
+                    </span>
+                    <span class="map-stat">
+                        <i class="fas fa-percent"></i> <span class="num" id="total-cfr">0%</span> CFR
+                    </span>
+                    <span class="map-stat">
+                        <span class="legend-dot red"></span> CFR ≥ 80%
+                    </span>
+                    <span class="map-stat">
+                        <span class="legend-dot orange"></span> CFR 50–79%
+                    </span>
+                    <span class="map-stat">
+                        <span class="legend-dot gold"></span> CFR &lt; 50% / bat reservoir
+                    </span>
+                    <span class="map-stat">
+                        <i class="fas fa-calendar-alt"></i> <span id="outbreak-count">0</span> outbreaks
+                    </span>
+                </div>
+            </div>
+
+            <!-- Extra notes about the map -->
+            <div class="map-notes">
+                <h3><i class="fas fa-pen-fancy"></i> Notes on reading this map</h3>
+                <ul>
+                    <li><strong>Marker color</strong> reflects the case-fatality rate (CFR) of that outbreak, not its size — a small red dot can represent a highly lethal but low-case-count event.</li>
+                    <li><strong>Dashed circles</strong> mark the general range of known <i>Pteropus</i> bat reservoir species and do not indicate outbreak activity themselves.</li>
+                    <li><strong>Coordinates are regional</strong>, centered on the affected district(s) or country, not exact patient locations, to protect privacy and reflect surveillance-level reporting.</li>
+                    <li><strong>Totals</strong> in the stats bar are aggregated from the outbreaks shown on this map and may differ slightly from cumulative WHO/CDC situation reports depending on reporting cut-off dates.</li>
+                    <li>Data compiled from WHO and CDC outbreak investigations and published surveillance literature (1998–2023).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta-wrap">
+            <a href="content table.html" class="btn">📖 Go to Table</a>
+        </div>
+
+    </div>
+
+<!-- ====== MAP JAVASCRIPT (merged from the outbreak-map page) ====== -->
+<script>
+    // ----- OUTBREAK DATA -----
+    const outbreakData = [
+        { country: 'Malaysia', location: 'Perak, Selangor, Negeri Sembilan', lat: 3.5, lng: 102.0, year: '1998-1999', cases: 265, deaths: 105, cfr: 39.6, note: 'First recognized outbreak · pig farmers' },
+        { country: 'Singapore', location: 'Abattoir workers', lat: 1.35, lng: 103.8, year: 'Mar 1999', cases: 11, deaths: 1, cfr: 9.1, note: 'Imported pigs from Malaysia' },
+        { country: 'Bangladesh', location: 'Meherpur', lat: 23.76, lng: 88.70, year: 'Apr-May 2001', cases: 13, deaths: 9, cfr: 69.2, note: 'First Bangladesh outbreak' },
+        { country: 'Bangladesh', location: 'Naogaon', lat: 24.80, lng: 88.93, year: 'Jan 2003', cases: 12, deaths: 8, cfr: 66.7, note: '' },
+        { country: 'Bangladesh', location: 'Rajbari & Faridpur', lat: 23.55, lng: 89.60, year: 'Jan-Apr 2004', cases: 67, deaths: 50, cfr: 74.6, note: 'Large outbreak' },
+        { country: 'Bangladesh', location: 'Tangail', lat: 24.25, lng: 89.92, year: 'Jan-Mar 2005', cases: 12, deaths: 11, cfr: 91.7, note: '' },
+        { country: 'Bangladesh', location: 'Kushtia, Naogaon, Natore, Pabna, Thakurgaon', lat: 24.50, lng: 89.00, year: 'Jan-Apr 2007', cases: 18, deaths: 9, cfr: 50.0, note: '' },
+        { country: 'Bangladesh', location: 'Manikganj & Rajbari', lat: 23.85, lng: 90.00, year: 'Feb-Apr 2008', cases: 11, deaths: 9, cfr: 81.8, note: '' },
+        { country: 'Bangladesh', location: 'Gaibandha, Nilphamari, Rangpur, Rajbari', lat: 25.50, lng: 89.50, year: 'Jan 2009', cases: 4, deaths: 1, cfr: 25.0, note: '' },
+        { country: 'Bangladesh', location: 'Faridpur, Gopalganj, Kurigram, Rajbari', lat: 23.60, lng: 89.80, year: 'Feb-Mar 2010', cases: 17, deaths: 15, cfr: 88.2, note: '' },
+        { country: 'Bangladesh', location: 'Comilla, Dinajpur, Faridpur, Lalmonirhat, Nilphamari', lat: 24.00, lng: 90.50, year: 'Jan-Feb 2011', cases: 44, deaths: 40, cfr: 90.9, note: '' },
+        { country: 'Bangladesh', location: 'Joypurhat', lat: 25.10, lng: 89.02, year: 'Jan 2012', cases: 12, deaths: 10, cfr: 83.3, note: '' },
+        { country: 'Bangladesh', location: 'Gaibandha, Manikganj, Naogaon, Natore, Pabna', lat: 24.30, lng: 89.30, year: 'Jan-Apr 2013', cases: 24, deaths: 21, cfr: 87.5, note: '' },
+        { country: 'Bangladesh', location: '13 districts', lat: 24.00, lng: 90.00, year: 'Jan-Feb 2014', cases: 18, deaths: 9, cfr: 50.0, note: 'Widespread' },
+        { country: 'Bangladesh', location: 'Faridpur, Magura, Naogaon, Nilphamari, Ponchoghor, Rajbari', lat: 24.20, lng: 89.50, year: 'Jan-Feb 2015', cases: 9, deaths: 6, cfr: 66.7, note: '' },
+        { country: 'India', location: 'Siliguri, West Bengal', lat: 26.73, lng: 88.43, year: 'Jan-Feb 2001', cases: 66, deaths: 45, cfr: 68.2, note: 'India\'s first outbreak · H2H transmission' },
+        { country: 'India', location: 'Nadia, West Bengal', lat: 23.10, lng: 88.50, year: 'Apr 2007', cases: 5, deaths: 5, cfr: 100.0, note: '100% mortality' },
+        { country: 'India', location: 'Kozhikode & Malappuram, Kerala', lat: 11.25, lng: 75.78, year: 'May 2018', cases: 18, deaths: 17, cfr: 94.4, note: 'Major outbreak · 23 cases including index' },
+        { country: 'India', location: 'Kerala', lat: 10.85, lng: 76.20, year: 'Sep 2023', cases: 6, deaths: 2, cfr: 33.3, note: 'Recent outbreak' },
+        { country: 'Philippines', location: 'Southern Philippines', lat: 12.00, lng: 124.00, year: 'Mar-May 2014', cases: 17, deaths: 9, cfr: 52.9, note: 'Horse exposure · meat consumption' }
+    ];
+
+    // ----- BAT RESERVOIR LOCATIONS -----
+    const batReservoirs = [
+        { lat: 24.0, lng: 78.0, name: 'P. giganteus (India)' },
+        { lat: 23.0, lng: 90.0, name: 'P. giganteus (Bangladesh)' },
+        { lat: 4.0, lng: 102.0, name: 'P. vampyrus (Malaysia)' },
+        { lat: -5.0, lng: 115.0, name: 'P. vampyrus (Indonesia)' },
+        { lat: 15.0, lng: 105.0, name: 'P. lylei (Thailand/Cambodia)' },
+        { lat: 20.0, lng: 100.0, name: 'P. lylei (Laos)' },
+        { lat: 6.0, lng: 124.0, name: 'P. vampyrus (Philippines)' }
+    ];
+
+    // ----- CALCULATE TOTALS -----
+    let totalCases = 0;
+    let totalDeaths = 0;
+    outbreakData.forEach(d => {
+        totalCases += d.cases;
+        totalDeaths += d.deaths;
+    });
+    const totalCfr = ((totalDeaths / totalCases) * 100).toFixed(1);
+
+    document.getElementById('total-cases').textContent = totalCases.toLocaleString();
+    document.getElementById('total-deaths').textContent = totalDeaths.toLocaleString();
+    document.getElementById('total-cfr').textContent = totalCfr + '%';
+    document.getElementById('outbreak-count').textContent = outbreakData.length;
+
+    // ----- INITIALIZE MAP -----
+    const map = L.map('outbreak-map', {
+        center: [15, 90],
+        zoom: 4,
+        zoomControl: true,
+        fadeAnimation: true,
+        zoomAnimation: true
+    });
+
+    // Light tile layer to match the page's paper theme
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; CartoDB'
+    }).addTo(map);
+
+    // ----- COLOR BY CASE FATALITY RATE (matched to page palette) -----
+    function getMarkerColor(cfr) {
+        if (cfr >= 80) return '#b54a42';
+        if (cfr >= 50) return '#c47a3a';
+        return '#2a7a7a';
+    }
+
+    // ----- ADD OUTBREAK MARKERS -----
+    outbreakData.forEach(d => {
+        const color = getMarkerColor(d.cfr);
+        const icon = L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="background-color:${color}; width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,0.95); box-shadow: 0 0 8px rgba(26,42,51,0.3);"></div>`,
+            iconSize: [14, 14],
+            iconAnchor: [7, 7]
+        });
+
+        const popupContent = `
+            <div class="popup-title">${d.country} · ${d.year}</div>
+            <div style="color:#8a9ba8; font-size:0.8rem;">${d.location}</div>
+            <div class="popup-stat">
+                <span class="cases"><i class="fas fa-user"></i> ${d.cases} cases</span>
+                <span class="deaths"><i class="fas fa-skull"></i> ${d.deaths} deaths</span>
+                <span class="cfr"><i class="fas fa-percent"></i> ${d.cfr}% CFR</span>
+            </div>
+            ${d.note ? `<div style="color:#8a9ba8; font-size:0.76rem; margin-top:4px; border-top:1px solid #e5ddd5; padding-top:4px;">${d.note}</div>` : ''}
+        `;
+
+        L.marker([d.lat, d.lng], { icon: icon })
+            .addTo(map)
+            .bindPopup(popupContent, { className: 'custom-popup' });
+    });
+
+    // ----- ADD BAT RESERVOIR CIRCLES -----
+    batReservoirs.forEach(r => {
+        L.circle([r.lat, r.lng], {
+            color: '#2a7a7a',
+            fillColor: '#2a7a7a',
+            fillOpacity: 0.12,
+            radius: 180000,
+            weight: 1.5,
+            dashArray: '6, 6'
+        }).addTo(map)
+            .bindPopup(`<b style="color:#1a5555; font-family:'Source Serif 4', serif;">${r.name}</b><br><span style="color:#8a9ba8;">Natural reservoir · Pteropus</span>`, {
+                className: 'custom-popup'
+            });
+    });
+
+    // ----- MAP LEGEND (custom control) -----
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function() {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.style.background = '#fcf9f7';
+        div.style.color = '#1a2a33';
+        div.style.padding = '12px 16px';
+        div.style.border = '1px solid #d5cbc2';
+        div.style.borderRadius = '8px';
+        div.style.fontSize = '0.78rem';
+        div.style.fontFamily = "'IBM Plex Sans', sans-serif";
+        div.style.minWidth = '140px';
+        div.style.boxShadow = '0 4px 12px rgba(26,42,51,0.06)';
+        div.innerHTML = `
+            <div style="font-weight:600; color:#1a5555; margin-bottom:6px; border-bottom:1px solid #d5cbc2; padding-bottom:4px; font-family:'Source Serif 4', serif;">
+                <i class="fas fa-info-circle"></i> Legend
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin:4px 0;">
+                <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#b54a42;"></span>
+                <span>CFR ≥ 80%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin:4px 0;">
+                <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#c47a3a;"></span>
+                <span>CFR 50–79%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin:4px 0;">
+                <span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#2a7a7a;"></span>
+                <span>CFR &lt; 50%</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; margin:4px 0; border-top:1px solid #e5ddd5; padding-top:4px;">
+                <span style="display:inline-block; width:16px; height:16px; border-radius:50%; border:2px dashed #2a7a7a; background:rgba(42,122,122,0.12);"></span>
+                <span>Bat reservoir</span>
+            </div>
+        `;
+        return div;
+    };
+    legend.addTo(map);
+
+    // ----- MAP RESIZE HANDLER -----
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 200);
+
+    window.addEventListener('resize', () => {
+        map.invalidateSize();
+    });
+</script>
+
+</body>
+
+</html>
