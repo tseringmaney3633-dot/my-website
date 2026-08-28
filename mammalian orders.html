@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mammalian Susceptibility to Nipah Virus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(160deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+            padding: 30px 20px;
+            line-height: 1.8;
+        }
+
+        /* ===== NAVIGATION ===== */
+        header {
+            max-width: 1300px;
+            margin: 0 auto 40px auto;
+            padding: 15px 30px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2dd4bf, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #2dd4bf, #38bdf8);
+            color: #0f172a;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(45, 212, 191, 0.3);
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        .nav-links li a:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 35px rgba(45, 212, 191, 0.5);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            max-width: 1300px;
+            margin: 0 auto 50px auto;
+            text-align: center;
+            padding: 80px 30px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(56, 189, 248, 0.05));
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #2dd4bf, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(226, 232, 240, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(45, 212, 191, 0.15);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2dd4bf;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== QUICK STATS ===== */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1300px;
+            margin: 0 auto 50px auto;
+        }
+
+        .stat-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card:hover {
+            background: rgba(45, 212, 191, 0.1);
+            border-color: rgba(45, 212, 191, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(45, 212, 191, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #2dd4bf, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: rgba(226, 232, 240, 0.7);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== MEDIA SECTION ===== */
+        .media-section {
+            max-width: 1300px;
+            margin: 0 auto 50px auto;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .media-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 25px;
+            padding: 15px;
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .media-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(45, 212, 191, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .media-card img,
+        .media-card video {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 18px;
+            display: block;
+            border: 2px solid rgba(45, 212, 191, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        .media-card:hover img,
+        .media-card:hover video {
+            border-color: #2dd4bf;
+        }
+
+        .media-card video {
+            background: #000;
+        }
+
+        .media-label {
+            text-align: center;
+            padding: 15px 0 5px 0;
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.6);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .media-label span {
+            color: #2dd4bf;
+            font-weight: 700;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 60px 70px;
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #2dd4bf;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(45, 212, 191, 0.3);
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(226, 232, 240, 0.6);
+            margin-bottom: 40px;
+        }
+
+        /* ===== HIGHLIGHT BOX ===== */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(56, 189, 248, 0.1));
+            border-left: 5px solid #2dd4bf;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            font-size: 1.05rem;
+        }
+
+        .highlight-box strong {
+            color: #2dd4bf;
+        }
+
+        /* ===== ORDER CARDS ===== */
+        .order-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .order-card {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 25px;
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .order-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(45, 212, 191, 0.4);
+            box-shadow: 0 20px 50px rgba(45, 212, 191, 0.15);
+        }
+
+        .order-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), transparent);
+        }
+
+        .order-icon {
+            font-size: 2.5rem;
+        }
+
+        .order-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #2dd4bf;
+        }
+
+        .order-body {
+            padding: 30px;
+        }
+
+        .order-body p {
+            font-size: 0.95rem;
+            color: rgba(226, 232, 240, 0.85);
+            margin-bottom: 15px;
+        }
+
+        .species-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .species-list li {
+            padding: 15px 20px;
+            background: rgba(45, 212, 191, 0.05);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2dd4bf;
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .species-list li:hover {
+            background: rgba(45, 212, 191, 0.12);
+            transform: translateX(5px);
+        }
+
+        .species-list li strong {
+            color: #2dd4bf;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        /* ===== TABLE ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        th {
+            background: linear-gradient(135deg, #2dd4bf, #38bdf8);
+            color: #0f172a;
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid rgba(45, 212, 191, 0.1);
+            font-size: 0.9rem;
+            color: rgba(226, 232, 240, 0.85);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(45, 212, 191, 0.03);
+        }
+
+        tr:hover {
+            background: rgba(45, 212, 191, 0.08);
+        }
+
+        /* ===== BUTTONS ===== */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: none;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2dd4bf, #38bdf8);
+            color: #0f172a;
+            box-shadow: 0 4px 25px rgba(45, 212, 191, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 50px rgba(45, 212, 191, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(45, 212, 191, 0.15);
+            border-color: #2dd4bf;
+            transform: translateY(-4px) scale(1.03);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: rgba(226, 232, 240, 0.5);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(45, 212, 191, 0.1);
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #2dd4bf;
+            text-decoration: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 40px 30px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px 18px;
+                border-radius: 25px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .order-grid {
+                grid-template-columns: 1fr;
+            }
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header>
+        <div class="logo">🦇 NiV Host Range</div>
+        <ul class="nav-links">
+            <li><a href="overview2.html">🏠📖Overview of Nipah</a></li>
+                   </ul>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <div class="hero">
+        <div class="hero-badge">🦠 Host Range Analysis</div>
+        <h1>Mammalian Susceptibility to Nipah Virus</h1>
+        <p>An in-depth exploration of the exceptionally broad host range of NiV, spanning at least six distinct mammalian orders.</p>
+    </div>
+
+    <!-- ===== QUICK STATS ===== -->
+    <div class="quick-stats">
+        <div class="stat-card">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Mammalian Orders</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">95-96%</div>
+            <div class="stat-label">Receptor Similarity</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">4+</div>
+            <div class="stat-label">Pteropus Species</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">🦇</div>
+            <div class="stat-label">Primary Reservoir</div>
+        </div>
+    </div>
+
+    <!-- ===== MEDIA SECTION (Upload your video and images here) ===== -->
+    <div class="media-section">
+        <div class="media-grid">
+            <!-- Image 1 -->
+            <div class="media-card">
+                <img src="images1.jpg" alt="Mammalian Host Image 1">
+                <div class="media-label">🔬 <span>Mammalian Hosts Overview</span></div>
+            </div>
+
+            <!-- Video -->
+            <div class="media-card">
+                <video controls>
+                    <source src="What Is Nipah Virus.mp4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="media-label">🎥 <span>Mammalian Susceptibility Video</span></div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class="media-card">
+                <img src="images2.jpg" alt="Mammalian Host Image 2">
+                <div class="media-label">🧬 <span>Host Range Visualization</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="container">
+
+        <!-- INTRODUCTION -->
+        <h2 class="section-title">🔬 Overview of Host Range</h2>
+        <p class="section-subtitle">Why NiV infects so many different mammals</p>
+
+        <p style="margin-bottom: 20px;">
+            Nipah virus (NiV) is characterized by an <strong style="color:#2dd4bf;">exceptionally broad host range</strong>, with documented natural infections, serological exposures, or experimental susceptibilities spanning at least <strong style="color:#2dd4bf;">six distinct mammalian orders</strong>. This wide tropism is highly unusual for paramyxoviruses, which typically have a narrow, species-restricted host range.
+        </p>
+
+        <div class="highlight-box">
+            <strong>🧬 Biological Driver:</strong> This broad cross-species compatibility is biologically driven by the virus's utilization of the highly conserved host cell surface receptors, <strong>Ephrin-B2 and Ephrin-B3</strong>, for cell entry. Because Ephrin-B2 plays a critical role in cellular migration and vasculogenesis, it is evolutionarily conserved across a vast array of mammals, with receptor sequence similarity among bats, pigs, and humans approaching <strong>95% to 96%</strong>.
+        </div>
+
+        <!-- ORDER 1: CHIROPTERA -->
+        <h2 class="section-title" style="margin-top: 60px;">🦇 1. Order Chiroptera (Bats)</h2>
+        <p class="section-subtitle">Primary natural hosts and reservoirs</p>
+
+        <p style="margin-bottom: 30px;">
+            Members of the order Chiroptera serve as the primary natural hosts and reservoirs of the virus. They are infected without showing significant clinical symptoms or pathological changes, allowing persistent viral circulation within bat populations.
+        </p>
+
+        <div class="order-grid">
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🦇</div>
+                    <div class="order-name">Genus Pteropus (Flying Foxes)</div>
+                </div>
+                <div class="order-body">
+                    <p>The established primary natural reservoir. Outbreaks closely align with Pteropus distribution.</p>
+                    <ul class="species-list">
+                        <li><strong>Pteropus giganteus</strong> India & Bangladesh</li>
+                        <li><strong>Pteropus vampyrus</strong> Malaysia, Indonesia, East Timor</li>
+                        <li><strong>Pteropus hypomelanus</strong> Malaysia</li>
+                        <li><strong>Pteropus lylei</strong> Cambodia & Thailand</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🦇</div>
+                    <div class="order-name">Other Bat Genera</div>
+                </div>
+                <div class="order-body">
+                    <p>Non-Pteropid fruit bats also show evidence of exposure.</p>
+                    <ul class="species-list">
+                        <li><strong>Rousettus amplexicaudatus</strong> Non-Pteropid fruit bat; positive for NiV RNA in East Timor</li>
+                        <li><strong>Eidolon helvum</strong> Straw-colored fruit bat; henipavirus exposure in Ghana, West Africa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDER 2: PRIMATES -->
+        <h2 class="section-title" style="margin-top: 60px;">🐒 2. Order Primates (Humans & Non-Human Primates)</h2>
+        <p class="section-subtitle">Highly susceptible, often severe disease</p>
+
+        <p style="margin-bottom: 30px;">
+            Primates are highly susceptible to Nipah virus infection, which often manifests as severe, fatal neurological and respiratory disease.
+        </p>
+
+        <div class="order-grid">
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">👤</div>
+                    <div class="order-name">Humans (Homo sapiens)</div>
+                </div>
+                <div class="order-body">
+                    <p>Highly affected, exhibiting:</p>
+                    <ul class="species-list">
+                        <li><strong>Encephalitis</strong> Rapid, progressive brain inflammation</li>
+                        <li><strong>Respiratory</strong> Atypical pneumonia, ARDS</li>
+                        <li><strong>CFR</strong> 40-75% or more</li>
+                        <li><strong>Sequelae</strong> Permanent neurological deficits</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐵</div>
+                    <div class="order-name">Non-Human Primates</div>
+                </div>
+                <div class="order-body">
+                    <p>Used as laboratory models for vaccines and therapeutics.</p>
+                    <ul class="species-list">
+                        <li><strong>African Green Monkeys</strong> Premier model; severe interstitial pneumonia, fatal encephalitis</li>
+                        <li><strong>Squirrel Monkeys</strong> Develop symptomatic infection</li>
+                        <li><strong>Cynomolgus Macaques</strong> Notably do NOT develop symptomatic infection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDER 3: ARTIODACTYLA -->
+        <h2 class="section-title" style="margin-top: 60px;">🐖 3. Order Artiodactyla (Even-Toed Ungulates)</h2>
+        <p class="section-subtitle">Critical intermediate hosts and vectors</p>
+
+        <div class="order-grid">
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐷</div>
+                    <div class="order-name">Pigs (Sus scrofa)</div>
+                </div>
+                <div class="order-body">
+                    <p>Critical intermediate and amplifying hosts in Malaysia/Singapore (1998-1999).</p>
+                    <ul class="species-list">
+                        <li><strong>Disease:</strong> Porcine Respiratory & Encephalitis Syndrome (PRES)</li>
+                        <li><strong>Signs:</strong> "Barking pig syndrome" or "one-mile cough"</li>
+                        <li><strong>Morbidity:</strong> ~100% in enclosed populations</li>
+                        <li><strong>Mortality:</strong> Low (1-5%), except in young piglets</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐄</div>
+                    <div class="order-name">Other Livestock (Cattle, Goats, Sheep)</div>
+                </div>
+                <div class="order-body">
+                    <p>Susceptible with varying degrees of disease.</p>
+                    <ul class="species-list">
+                        <li><strong>Cattle</strong> Serological evidence in Bangladesh; linked to human transmission</li>
+                        <li><strong>Goats</strong> High seroprevalence in endemic areas</li>
+                        <li><strong>Sheep</strong> Virus infects monocytes, NK cells, T-lymphocytes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDER 4: PERISSODACTYLA -->
+        <h2 class="section-title" style="margin-top: 60px;">🐴 4. Order Perissodactyla (Odd-Toed Ungulates)</h2>
+
+        <div class="order-grid">
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐴</div>
+                    <div class="order-name">Horses (Equus caballus)</div>
+                </div>
+                <div class="order-body">
+                    <p>Primary intermediate and amplifying hosts during the <strong>2014 Philippines outbreak</strong>.</p>
+                    <ul class="species-list">
+                        <li><strong>Disease:</strong> Severe, fatal neurological syndrome</li>
+                        <li><strong>Transmission:</strong> Direct contact with sick horses</li>
+                        <li><strong>Risk:</strong> Handling/consumption of undercooked horse meat</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDER 5: CARNIVORA -->
+        <h2 class="section-title" style="margin-top: 60px;">🐕 5. Order Carnivora</h2>
+
+        <div class="order-grid">
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐕</div>
+                    <div class="order-name">Dogs (Canis lupus familiaris)</div>
+                </div>
+                <div class="order-body">
+                    <p>Frequently infected on pig farms during the Malaysian outbreak.</p>
+                    <ul class="species-list">
+                        <li><strong>Lesions:</strong> Necrotizing lesions, pulmonary inflammation</li>
+                        <li><strong>Kidneys:</strong> Syncytial cell formation</li>
+                        <li><strong>Risk:</strong> Death of farm dogs was a critical risk factor for human transmission</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐱</div>
+                    <div class="order-name">Cats & Ferrets</div>
+                </div>
+                <div class="order-body">
+                    <ul class="species-list">
+                        <li><strong>Cats (Felis catus)</strong> Highly susceptible; severe disseminated endothelial syncytia and acute vasculopathy</li>
+                        <li><strong>Ferrets (Mustela putorius furo)</strong> Standard laboratory model; reliably induces severe systemic disease</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDER 6: RODENTIA -->
+        <h2 class="section-title" style="margin-top: 60px;">🐹 6. Order Rodentia</h2>
+
+        <div class="order-grid">
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐹</div>
+                    <div class="order-name">Hamsters & Guinea Pigs</div>
+                </div>
+                <div class="order-body">
+                    <ul class="species-list">
+                        <li><strong>Golden/Syrian Hamsters</strong> Standard small-animal model; severe CNS lesions, systemic vasculopathy, lethal respiratory disease</li>
+                        <li><strong>Guinea Pigs</strong> Historically used; develop systemic vasculopathy and severe disease</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-icon">🐭</div>
+                    <div class="order-name">Mice & Rats (Excluded)</div>
+                </div>
+                <div class="order-body">
+                    <p style="color:#f87171;">Interestingly, clinical signs of disease are apparently <strong style="color:#f87171;">absent in mice and rats</strong> during experimental infection, though the underlying biological mechanism for this resistance remains unknown.</p>
+                    <p style="font-size: 0.85rem; margin-top: 10px; color: rgba(226,232,240,0.6);">(However, modified knockout mice models are sometimes utilized for tracking viral replication.)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUMMARY TABLE -->
+        <h2 class="section-title" style="margin-top: 60px;">📊 Summary Table</h2>
+
+        <table>
+            <tr>
+                <th>Order</th>
+                <th>Examples</th>
+                <th>Role / Status</th>
+            </tr>
+            <tr>
+                <td><strong>Chiroptera</strong></td>
+                <td>Pteropus spp., Rousettus, Eidolon</td>
+                <td style="color:#2dd4bf;">Natural Reservoirs</td>
+            </tr>
+            <tr>
+                <td><strong>Primates</strong></td>
+                <td>Humans, African Green Monkeys</td>
+                <td style="color:#f87171;">Highly Susceptible / Disease</td>
+            </tr>
+            <tr>
+                <td><strong>Artiodactyla</strong></td>
+                <td>Pigs, Cattle, Goats, Sheep</td>
+                <td style="color:#fbbf24;">Intermediate Hosts</td>
+            </tr>
+            <tr>
+                <td><strong>Perissodactyla</strong></td>
+                <td>Horses</td>
+                <td style="color:#fbbf24;">Amplifying Hosts</td>
+            </tr>
+            <tr>
+                <td><strong>Carnivora</strong></td>
+                <td>Dogs, Cats, Ferrets</td>
+                <td style="color:#f87171;">Susceptible / Models</td>
+            </tr>
+            <tr>
+                <td><strong>Rodentia</strong></td>
+                <td>Hamsters, Guinea Pigs</td>
+                <td style="color:#2dd4bf;">Laboratory Models</td>
+            </tr>
+            <tr>
+                <td><strong>Rodentia (Excluded)</strong></td>
+                <td>Mice, Rats</td>
+                <td style="color:#94a3b8;">Resistant / No Disease</td>
+            </tr>
+        </table>
+
+        <!-- ===== NAVIGATION BUTTONS ===== -->
+        <div class="button-container">
+            <a href="introduction.html" class="btn btn-secondary">
+                🏠 Back to Introduction
+            </a>
+            <a href="content table.html" class="btn btn-primary">
+                📖 Go to Table
+            </a>
+        </div>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>© 2026 Nipah Virus Research Information Page | Created for educational purposes</p>
+        <p>🔬 Data sourced from comprehensive scientific literature on Mammalian Susceptibility to NiV</p>
+    </footer>
+
+</body>
+</html>
